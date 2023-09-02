@@ -27,3 +27,35 @@
     font-family: "Outfit", sans-serif;
     margin-left: 2rem;
 }
+
+.left {
+    display: flex;
+}
+
+.logo-image-container {
+    position: relative;
+    height: 40px;
+    width: 40px;
+}
+
+.title {
+    font-size: 2rem;
+    font-family: "Outfit", sans-serif;
+    font-weight: 400;
+    color: #354AA1;
+    margin-left: 1.5rem;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+}
+
+.link {
+    font-size: 1.25rem;
+    font-family: "Outfit", sans-serif;
+    font-weight: 400;
+    color: #fff;
+    margin-left: 3rem;
+    cursor: pointer;
+}
