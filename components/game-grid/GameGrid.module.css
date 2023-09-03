@@ -1,0 +1,46 @@
+.grid {
+    display: grid;
+    width: 80%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 3.125rem;
+
+}
+
+.game {
+    height: 300px;
+    background-size: cover;
+    border-radius: 1.5rem;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+.game:hover {
+}
+
+.game-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out;
+    z-index: 1;
+}
+.game-overlay:hover {
+    border: 2px solid #354AA1;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.game-title-container {
+    position: relative;
+    margin-bottom: 1rem;
+}
