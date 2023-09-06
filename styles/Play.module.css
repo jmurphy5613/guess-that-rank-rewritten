@@ -48,7 +48,7 @@
 
 }
 
-.get-started-button {
+.submit-button {
 	width: 13.75rem;
 	height: 3.125rem;
 	display: flex;
@@ -59,6 +59,7 @@
 	border: none;
 	cursor: pointer;
 	margin-top: 2rem;
+    width: 60vw;
 }
 
 

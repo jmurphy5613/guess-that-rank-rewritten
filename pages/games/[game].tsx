@@ -97,13 +97,18 @@ const Play = () => {
                     })}
                 </div>
                 <motion.button
-                    className={styles["get-started-button"]}
+                    className={styles["submit-button"]}
                     onMouseEnter={() => setHoveringLockInt(true)}
                     onMouseLeave={() => setHoveringLockInt(false)}
                     whileHover={{ scale: 1.1 }}
                     onClick={() => router.push('/games')}
                 >
-                    <h2 className={styles["button-text"]}>Get Started</h2>
+                    <motion.h2 
+                        className={styles["button-text"]}
+                        animate={{
+                            x: hoveringLockInt ? -10 : 0
+                        }}
+                    >Get Started</motion.h2>
                     <motion.div
                         animate={{
                             x: hoveringLockInt ? 10 : 0
