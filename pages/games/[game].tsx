@@ -54,6 +54,7 @@ const Play = () => {
     const [game, setGame] = useState<string>()
 
     const [hoveringLockInt, setHoveringLockInt] = useState<boolean>()
+    const [currentSelectedRank, setCurrentSelectedRank] = useState<number>()
 
     useEffect(() => {
         if (router.isReady) {
@@ -83,8 +84,20 @@ const Play = () => {
                 </div>
                 <div className={styles["ranks-container"]}>
                     {gameRanks[game].ranks.map((rank, index) => {
+
+                        const rankItemDimensions = getRankItemDimensions(gameRanks[game].ranks.length)
+
                         return (
-                            <div key={index} className={styles.rank} style={{ width: getRankItemDimensions(gameRanks[game].ranks.length), height: getRankItemDimensions(gameRanks[game].ranks.length) }}>
+                            <div 
+                                key={index} 
+                                onClick={() => setCurrentSelectedRank(index)}
+                                className={styles.rank} 
+                                style={{ 
+                                    width: rankItemDimensions, 
+                                    height: rankItemDimensions, 
+                                    border: currentSelectedRank === index ? '1px solid #354AA1' : 'none' 
+                                }}
+                            >
                                 <div className={styles["rank-image-container"]} style={{ height: getRankItemImageDimensions(gameRanks[game].ranks.length), width: getRankItemImageDimensions(gameRanks[game].ranks.length) }}>
                                     <Image
                                         fill
@@ -108,7 +121,7 @@ const Play = () => {
                         animate={{
                             x: hoveringLockInt ? -10 : 0
                         }}
-                    >Get Started</motion.h2>
+                    >Lock Guess</motion.h2>
                     <motion.div
                         animate={{
                             x: hoveringLockInt ? 10 : 0

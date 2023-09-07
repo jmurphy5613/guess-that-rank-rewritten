@@ -37,6 +37,10 @@
     justify-content: center;
     align-items: center;
     border-radius: 1rem;
+    cursor: pointer;
+}
+.rank:hover {
+    border: 1px solid #354AA1 !important;
 }
 
 .rank-image-container {
