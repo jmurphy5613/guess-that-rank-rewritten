@@ -6,6 +6,7 @@ import GameRanks from '@/utils/types'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import RightArrow from '@/components/icons/RightArrow'
+import PostGuessPopup from '@/components/post-guess-popup/PostGuessPopup'
 
 const gameRanks: GameRanks = {
     valorant: {
@@ -55,6 +56,7 @@ const Play = () => {
 
     const [hoveringLockInt, setHoveringLockInt] = useState<boolean>()
     const [currentSelectedRank, setCurrentSelectedRank] = useState<number>()
+    const [showPostGuessPopup, setShowPostGuessPopup] = useState<boolean>(false)
 
     useEffect(() => {
         if (router.isReady) {
@@ -76,6 +78,7 @@ const Play = () => {
 
     return (
         <>
+            {showPostGuessPopup && <PostGuessPopup setShowPostGuessPopup={setShowPostGuessPopup} /> }
             <Navbar />
             <div className={styles.container}>
                 <h2 className={styles["guess-name"]}>Guess <span style={{ color: '#354AA1' }}>#42</span></h2>
@@ -114,7 +117,7 @@ const Play = () => {
                     onMouseEnter={() => setHoveringLockInt(true)}
                     onMouseLeave={() => setHoveringLockInt(false)}
                     whileHover={{ scale: 1.1 }}
-                    onClick={() => router.push('/games')}
+                    onClick={() => setShowPostGuessPopup(true)}
                 >
                     <motion.h2 
                         className={styles["button-text"]}
