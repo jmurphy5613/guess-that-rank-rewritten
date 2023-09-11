@@ -1,12 +1,18 @@
 import { motion } from 'framer-motion'
 import styles from './PostGuessPopup.module.css'
 import Image from 'next/image';
+import CountUp from 'react-countup';
+import UpArrow from '../icons/UpArrow';
+import { useState } from 'react';
 
 interface PostGuessPopupProps {
     setShowPostGuessPopup: (show: boolean) => void;
 }
 
 const PostGuessPopup: React.FC<PostGuessPopupProps> = ({ setShowPostGuessPopup }) => {
+
+    const [showArrow, setShowArrow] = useState<boolean>(false)
+
     return (
         <motion.div
             className={styles.backdrop}
@@ -48,9 +54,55 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> = ({ setShowPostGuessPopup }
                 </div>
                 <div className={styles.stats}>
                     <div className={styles.stat} style={{ marginRight: '0.5rem' }}>
+                        <div className={styles["count-up-wrapper"]}>
+                            <CountUp
+                                start={0}
+                                end={50}
+                                className={styles["count-up"]}
+                                onEnd={() => {
+                                    setShowArrow(true)
+                                }}
+                            />``
+                            <motion.div
+                                className={styles["increase-icon-container"]}
+                                animate={{
+                                    opacity: showArrow ? 1 : 0,
+                                    y: showArrow ? 0 : 10
+                                }}
+                                transition={{
+                                    duration: .2
+                                }}
+                            >
+                                {showArrow && <UpArrow stroke="#6EF36B" />}
+                            </motion.div>
+                        </div>
+                        <h3 className={styles.description}>Valorant Points</h3>
                     </div>
                     <div className={styles.stat} style={{ marginLeft: '0.5rem' }}>
+                        <div className={styles["count-up-wrapper"]}>
+                            <CountUp
+                                start={0}
+                                end={96}
+                                className={styles["count-up"]}
+                                onCompleteCallback={() => {
+                                    setShowArrow(true)
+                                }}
+                            />
+                            <motion.div
+                                className={styles["increase-icon-container"]}
+                                animate={{
+                                    opacity: showArrow ? 1 : 0,
+                                    y: showArrow ? 0 : 10
+                                }}
+                                transition={{
+                                    duration: .2
+                                }}
+                            >
+                                {showArrow && <UpArrow stroke="#6EF36B" />}
+                            </motion.div>
+                        </div>
 
+                        <h3 className={styles.description}>Overall Points</h3>
                     </div>
                 </div>
                 <div className={styles.footer}>
