@@ -29,3 +29,41 @@
     display: flex;
     flex-direction: column;
 }
+
+.clip-input {
+    height: 60px;
+    background-color: #1B1C26;
+    font-family: "Outfit", sans-serif;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    margin-top: 1rem;
+    padding-left: 1rem;
+    border-radius: 1rem;
+}
+
+.submit-button {
+	height: 3.125rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #354AA1;
+	border-radius: 0.75rem;
+	border: none;
+	cursor: pointer;
+	margin-top: 2rem;
+}
+
+.button-text {
+	font-size: 1.25rem;
+	color: #fff;
+	font-family: "Outfit", sans-serif;
+	font-weight: 400;
+	margin-right: 0.5rem;
+}
+
+.arrow-icon-container {
+	position: relative;
+	height: 35px;
+	width: 35px;
+}
