@@ -22,7 +22,6 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> = ({ setShowPostGuessPopup }
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: .2 }}
-            onClick={() => setShowPostGuessPopup(false)}
         >
             <motion.div
                 className={styles.container}
@@ -64,7 +63,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> = ({ setShowPostGuessPopup }
                                 onEnd={() => {
                                     setShowArrow(true)
                                 }}
-                            />``
+                            />
                             <motion.div
                                 className={styles["increase-icon-container"]}
                                 animate={{
@@ -114,7 +113,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> = ({ setShowPostGuessPopup }
                         onMouseEnter={() => setHoveringNext(true)}
                         onMouseLeave={() => setHoveringNext(false)}
                         whileHover={{ scale: 1.1 }}
-                        onClick={() => setShowPostGuessPopup(true)}
+                        onClick={() => setShowPostGuessPopup(false)}
                     >
                         <motion.h2
                             className={styles["button-text"]}

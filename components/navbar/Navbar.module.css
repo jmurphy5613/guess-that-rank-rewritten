@@ -58,4 +58,8 @@
     color: #fff;
     margin-left: 3rem;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.link:hover {
+    transform: scale(1.03);
 }

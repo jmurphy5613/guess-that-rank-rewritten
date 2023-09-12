@@ -12,7 +12,7 @@ const links = [
     },
     {
         name: 'Submit Clip',
-        href: '/submit'
+        href: '/submit-clip'
     },
 ]
 
