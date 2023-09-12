@@ -105,3 +105,50 @@
     justify-content: center;
     align-items: center;
 }
+
+
+.submit-button {
+	height: 3.125rem;
+    width: 10rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #354AA1;
+	border-radius: 0.75rem;
+	border: none;
+	cursor: pointer;
+}
+
+
+.button-text {
+	font-size: 1.25rem;
+	color: #fff;
+	font-family: "Outfit", sans-serif;
+	font-weight: 400;
+	margin-right: 0.5rem;
+}
+
+.arrow-icon-container {
+	position: relative;
+	height: 35px;
+	width: 35px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.credit {
+    font-family: "Outfit", sans-serif;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding-left: 0.5rem;
+}
+
+.blue {
+    color: #354AA1;
+}

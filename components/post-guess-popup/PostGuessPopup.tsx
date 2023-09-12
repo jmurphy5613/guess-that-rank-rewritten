@@ -4,6 +4,7 @@ import Image from 'next/image';
 import CountUp from 'react-countup';
 import UpArrow from '../icons/UpArrow';
 import { useState } from 'react';
+import RightArrow from '../icons/RightArrow';
 
 interface PostGuessPopupProps {
     setShowPostGuessPopup: (show: boolean) => void;
@@ -12,6 +13,7 @@ interface PostGuessPopupProps {
 const PostGuessPopup: React.FC<PostGuessPopupProps> = ({ setShowPostGuessPopup }) => {
 
     const [showArrow, setShowArrow] = useState<boolean>(false)
+    const [hoveringNext, setHoveringNext] = useState<boolean>(false)
 
     return (
         <motion.div
@@ -106,7 +108,29 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> = ({ setShowPostGuessPopup }
                     </div>
                 </div>
                 <div className={styles.footer}>
-
+                    <h2 className={styles.credit}>Clip Credit: <span className={styles.blue}>Cosmic</span></h2>
+                    <motion.button
+                        className={styles["submit-button"]}
+                        onMouseEnter={() => setHoveringNext(true)}
+                        onMouseLeave={() => setHoveringNext(false)}
+                        whileHover={{ scale: 1.1 }}
+                        onClick={() => setShowPostGuessPopup(true)}
+                    >
+                        <motion.h2
+                            className={styles["button-text"]}
+                            animate={{
+                                x: hoveringNext ? -10 : 0
+                            }}
+                        >Next</motion.h2>
+                        <motion.div
+                            animate={{
+                                x: hoveringNext ? 10 : 0
+                            }}
+                            className={styles["arrow-icon-container"]}
+                        >
+                            <RightArrow />
+                        </motion.div>
+                    </motion.button>
                 </div>
             </motion.div>
         </motion.div>
