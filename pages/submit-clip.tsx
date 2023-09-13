@@ -4,17 +4,8 @@ import Select from 'react-select'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import RightArrow from '@/components/icons/RightArrow'
+import { gameOptions } from '@/utils/constants'
 
-const gameOptions = [
-    {
-        value: 'valorant',
-        label: 'Valorant'
-    },
-    {
-        value: 'csgo',
-        label: 'CS:GO'
-    }
-]
 
 const selectStyles = {
     valueContainer: (provided: any, state: any) => ({
@@ -72,13 +63,18 @@ const selectStyles = {
         backgroundColor: '#1B1C26',
         border: 'none',
         fontFamily: 'Outfit, sans-serif',
-        fontSize: '1rem',
+        color: '#626262',
     }),
     container: (provided: any, state: any) => ({
         ...provided,
         marginTop: '1rem',
         borderRadius: '1rem',
+        color: '#626262',
     }),
+    singleValue: (provided: any, state: any) => ({
+        ...provided,
+        color: "#fff"
+    })
 
 }
 
@@ -110,9 +106,9 @@ const SubmitClip = () => {
                         className={styles["submit-button"]}
                         onMouseEnter={() => setHoveringSubmit(true)}
                         onMouseLeave={() => setHoveringSubmit(false)}
-                        // onClick={() => router.push('/games')}
+                    // onClick={() => router.push('/games')}
                     >
-                        <motion.h2 
+                        <motion.h2
                             className={styles["button-text"]}
                             animate={{
                                 x: hoveringSubmit ? -10 : 0

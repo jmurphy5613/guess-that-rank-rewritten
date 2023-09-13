@@ -2,51 +2,12 @@ import styles from '@/styles/Play.module.css'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Navbar from '@/components/navbar/Navbar'
-import GameRanks from '@/utils/types'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import RightArrow from '@/components/icons/RightArrow'
 import PostGuessPopup from '@/components/post-guess-popup/PostGuessPopup'
+import { gameRanks } from '@/utils/constants'
 
-const gameRanks: GameRanks = {
-    valorant: {
-        ranks: [
-            {
-                name: 'iron',
-                image: '/ranks/valorant/valorant-iron.png'
-            },
-            {
-                name: 'bronze',
-                image: '/ranks/valorant/valorant-bronze.png'
-            },
-            {
-                name: 'silver',
-                image: '/ranks/valorant/valorant-silver.png'
-            },
-            {
-                name: 'gold',
-                image: '/ranks/valorant/valorant-gold.png'
-            },
-            {
-                name: 'platinum',
-                image: '/ranks/valorant/valorant-platinum.png'
-            },
-            {
-                name: 'diamond',
-                image: '/ranks/valorant/valorant-diamond.png'
-            },
-            {
-                name: 'immortal',
-                image: '/ranks/valorant/valorant-immortal.png'
-            },
-            {
-                name: 'radiant',
-                image: '/ranks/valorant/valorant-radiant.png'
-            }
-        ]
-    },
-
-}
 
 const Play = () => {
 
@@ -78,7 +39,7 @@ const Play = () => {
 
     return (
         <>
-            {showPostGuessPopup && <PostGuessPopup setShowPostGuessPopup={setShowPostGuessPopup} /> }
+            {showPostGuessPopup && <PostGuessPopup setShowPostGuessPopup={setShowPostGuessPopup} />}
             <Navbar />
             <div className={styles.container}>
                 <h2 className={styles["guess-name"]}>Guess <span style={{ color: '#354AA1' }}>#42</span></h2>
@@ -91,14 +52,14 @@ const Play = () => {
                         const rankItemDimensions = getRankItemDimensions(gameRanks[game].ranks.length)
 
                         return (
-                            <div 
-                                key={index} 
+                            <div
+                                key={index}
                                 onClick={() => setCurrentSelectedRank(index)}
-                                className={styles.rank} 
-                                style={{ 
-                                    width: rankItemDimensions, 
-                                    height: rankItemDimensions, 
-                                    border: currentSelectedRank === index ? '1px solid #354AA1' : 'none' 
+                                className={styles.rank}
+                                style={{
+                                    width: rankItemDimensions,
+                                    height: rankItemDimensions,
+                                    border: currentSelectedRank === index ? '1px solid #354AA1' : 'none'
                                 }}
                             >
                                 <div className={styles["rank-image-container"]} style={{ height: getRankItemImageDimensions(gameRanks[game].ranks.length), width: getRankItemImageDimensions(gameRanks[game].ranks.length) }}>
@@ -119,7 +80,7 @@ const Play = () => {
                     whileHover={{ scale: 1.1 }}
                     onClick={() => setShowPostGuessPopup(true)}
                 >
-                    <motion.h2 
+                    <motion.h2
                         className={styles["button-text"]}
                         animate={{
                             x: hoveringLockInt ? -10 : 0
