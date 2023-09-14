@@ -1,5 +1,6 @@
 import styles from './Navbar.module.css'
 import Logo from '@/components/icons/Logo'
+import { useSession, signIn, signOut } from 'next-auth/react'
 
 const links = [
     {
@@ -17,6 +18,10 @@ const links = [
 ]
 
 const Navbar = () => {
+
+    const { data: session } = useSession()
+
+
     return (
         <div className={styles.container}>
             <div className={styles["left"]}>
@@ -31,8 +36,8 @@ const Navbar = () => {
                 </div>
             </div>
             <div className={styles["auth-container"]}>
-                <button className={styles["signin-button"]}>Sign in</button>
-                <button className={styles["signup-button"]}>Sign up</button>
+                <button className={styles["signin-button"]} onClick={() => signOut()}>Sign out</button>
+                <button className={styles["signup-button"]} onClick={() => signIn()}>Sign In</button>
             </div>
         </div>
     )
