@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import RightArrow from '../icons/RightArrow'
+import Home from '../icons/Home'
 
 const ClipSubmissionPopup = () => {
 
@@ -19,7 +20,7 @@ const ClipSubmissionPopup = () => {
                     className={styles["submit-button"]}
                     onMouseEnter={() => setHoveringGoHome(true)}
                     onMouseLeave={() => setHoveringGoHome(false)}
-                    onClick={() => router.push('/')}
+                    onClick={() => router.push('/games')}
                 >
                     <motion.h2
                         className={styles["button-text"]}
@@ -31,9 +32,9 @@ const ClipSubmissionPopup = () => {
                         animate={{
                             x: hoveringGoHome ? 10 : 0
                         }}
-                        className={styles["arrow-icon-container"]}
+                        className={styles["home-icon-container"]}
                     >
-                        <RightArrow />
+                        <Home />
                     </motion.div>
                 </motion.button>
             </div>
