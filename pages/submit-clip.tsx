@@ -5,6 +5,8 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import RightArrow from '@/components/icons/RightArrow'
 import { gameOptions } from '@/utils/constants'
+import { ReactSelectType } from '@/utils/types'
+import { createSelectArray } from '@/utils/conversions'
 
 
 const selectStyles = {
@@ -82,6 +84,7 @@ const selectStyles = {
 const SubmitClip = () => {
 
     const [hoveringSubmit, setHoveringSubmit] = useState<boolean>()
+    const [gameSelected, setGameSelected] = useState<ReactSelectType>()
 
     return (
         <>
@@ -93,9 +96,11 @@ const SubmitClip = () => {
                         options={gameOptions}
                         placeholder="Select a game"
                         styles={selectStyles}
+                        value={gameSelected}
+                        onChange={(e) => setGameSelected(e)}
                     />
                     <Select
-                        options={gameOptions}
+                        options={gameSelected && createSelectArray(gameSelected.value)}
                         placeholder="Select a rank"
                         styles={selectStyles}
                     />
@@ -106,7 +111,6 @@ const SubmitClip = () => {
                         className={styles["submit-button"]}
                         onMouseEnter={() => setHoveringSubmit(true)}
                         onMouseLeave={() => setHoveringSubmit(false)}
-                    // onClick={() => router.push('/games')}
                     >
                         <motion.h2
                             className={styles["button-text"]}

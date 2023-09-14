@@ -37,6 +37,42 @@ export const gameRanks: GameRanks = {
             }
         ]
     },
+    csgo: {
+        ranks: [
+            {
+                name: 'silver',
+                image: '/ranks/csgo/csgo-silver.png'
+            },
+            {
+                name: 'nova',
+                image: '/ranks/csgo/csgo-nova.png'
+            },
+            {
+                name: 'guardian',
+                image: '/ranks/csgo/csgo-guardian.png'
+            },
+            {
+                name: 'mge',
+                image: '/ranks/csgo/csgo-ak.png'
+            },
+            {
+                name: 'dmg',
+                image: '/ranks/csgo/csgo-dmg.png'
+            },
+            {
+                name: 'eagle',
+                image: '/ranks/csgo/csgo-eagle.png'
+            },
+            {
+                name: 'supreme',
+                image: '/ranks/csgo/csgo-supreme.png'
+            },
+            {
+                name: 'global',
+                image: '/ranks/csgo/csgo-global.png'
+            }
+        ]
+    }
 }
 
 export const gameOptions = [
@@ -49,13 +85,3 @@ export const gameOptions = [
         label: 'CS:GO'
     }
 ]
-
-export const createSelectArray = (game: string) => {
-    const ranks = gameRanks[game].ranks
-    const selectValues: ReactSelectType[] = []
-    for (const rank of ranks) {
-        selectValues.push({ label: rank.name, value: rank.name })
-    }
-
-    return selectValues
-}
