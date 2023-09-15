@@ -1,5 +1,7 @@
 import { gameRanks } from "./constants"
 import { ReactSelectType } from "./types"
+import GithubIcon from "@/components/icons/companies/Github"
+import GoogleIcon from "@/components/icons/companies/Google"
 
 export const createSelectArray = (game: string) => {
     const ranks = gameRanks[game].ranks
@@ -26,5 +28,14 @@ export const getMP4FromLink = (link: string) => {
         return `https://www.youtube.com/embed/${videoId}`
     } else if(link.includes('medal')) {
 
+    }
+}
+
+export const getCompanyIconFromId = (id: string) => {
+    if(id.toLocaleLowerCase().includes('google')) {
+        return (<GoogleIcon stroke="#fff" />)
+    }
+    if(id.toLocaleLowerCase().includes('github')) {
+        return (<GithubIcon stroke="#626262" />)
     }
 }

@@ -11,9 +11,10 @@ export const authOptions: NextAuthOptions = {
         }),
         GithubProvider({
             clientId: process.env.GITHUB_CLIENT_ID!,
-            clientSecret: process.env.GITHUB_CLIENT_SECRET!
+            clientSecret: process.env.GITHUB_CLIENT_SECRET!,
         })
     ],
+    secret: process.env.NEXTAUTH_SECRET!,
     pages: {
         signIn: '/auth/signin',
     }
