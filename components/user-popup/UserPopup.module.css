@@ -1,4 +1,32 @@
 .container {
-    padding: 2rem;
     position: absolute;
+    top: calc(100% + 1rem);
+    right: 0;  
+}
+
+.logout {
+    display: flex;
+    width: 10rem;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    background-color: #a12828;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.icon-container {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    margin-right: 1rem;
+}
+
+.button-text {
+    font-size: 1.25rem;
+    color: #fff;
+    font-family: "Outfit", sans-serif;
+    font-weight: 400;
 }

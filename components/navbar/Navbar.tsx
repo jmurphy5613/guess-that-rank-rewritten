@@ -2,7 +2,9 @@ import styles from './Navbar.module.css'
 import Logo from '@/components/icons/Logo'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import UserPopup from '../user-popup/UserPopup'
+import DownArrow from '../icons/DownArrow'
 
 const links = [
     {
@@ -20,6 +22,28 @@ const links = [
 ]
 
 const Navbar = () => {
+
+    function useOutsideAlerter(ref: React.RefObject<HTMLUnknownElement>) {
+        useEffect(() => {
+            /**
+             * Alert if clicked on outside of element
+             */
+            function handleClickOutside(event: { target: any; }) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setShowPopup(false)
+                }
+            }
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef);
 
     const { data: session } = useSession()
 
@@ -42,17 +66,25 @@ const Navbar = () => {
                 </div>
             </div>
             {session && session.user?.image ? (
-                <div className={styles["user-icon-container"]}>
-                    <Image 
-                        src={session.user.image}
-                        fill
-                        alt="User Icon"
-                        style={{ borderRadius: '100%' }}
-                    />
+                <div style={{ display: 'flex', alignItems: 'center', position: 'relative', cursor: 'pointer' }} ref={wrapperRef}  onClick={() => setShowPopup(true)}>
+                    <div className={styles["user-icon-container"]}>
+                        <Image
+                            src={session.user.image}
+                            fill
+                            alt="User Icon"
+                            style={{ borderRadius: '100%' }}
+                        />
+                    </div>
+                    <div className={styles["arrow-icon-container"]}>
+                        <DownArrow />
+                    </div>
+                    {showPopup && (
+                        <UserPopup />
+                    )}
                 </div>
+
             ) : (
                 <div className={styles["auth-container"]}>
-                    <button className={styles["signin-button"]} onClick={() => signOut()}>Sign out</button>
                     <button className={styles["signup-button"]} onClick={() => signIn()}>Sign In</button>
                 </div>
             )}
