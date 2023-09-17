@@ -76,8 +76,8 @@ const SubmitClip = () => {
                             console.log(getMP4FromLink(e.target.value))
                         }} 
                     />
-                    <input className={styles["clip-input"]} onChange={(e) => setClipUrl(e.target.value)} placeholder="Name for credit" />
-                    <input className={styles["clip-input"]} placeholder="Valorant username + tag ex. Cosmic#4473" />
+                    <input className={styles["clip-input"]} onChange={(e) => setName(e.target.value)} placeholder="Name for credit" />
+                    <input className={styles["clip-input"]} onChange={(e) => setUsername(e.target.value)} placeholder="Valorant username + tag ex. Cosmic#4473" />
                     <p className={styles.error}
                         onClick={() => setNotAllFieldsFilled(false)}
                     >{notAllFieldsFilled && "please fill out all the fields, we kinda need those :))))  (click on this to not see red)"}</p>

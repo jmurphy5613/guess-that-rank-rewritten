@@ -9,4 +9,9 @@ export default defineSchema({
         nameCredit: v.string(),
         username: v.string()
     }),
+    users: defineTable({
+        username: v.string(),
+        email: v.string(),
+        clips: v.array(v.id("clips")),
+    })
 })
