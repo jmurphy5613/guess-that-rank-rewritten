@@ -13,21 +13,21 @@ const UserPopup = () => {
             <motion.button className={styles.logout}
                 onMouseEnter={() => setHoveringLogout(true)}
                 onMouseLeave={() => setHoveringLogout(false)}
-                whileHover={{ scale: 1.1 }}
+                // whileHover={{ scale: 1.1 }}
                 onClick={() => signOut()}
             >
                 <motion.div className={styles["icon-container"]}
-                    animate={{
-                        x: hoveringLogout ? -10 : 0
-                    }}
+                    // animate={{
+                    //     x: hoveringLogout ? -10 : 0
+                    // }}
                 >
                     <Leave />
                 </motion.div>
                 <motion.h2
                     className={styles["button-text"]}
-                    animate={{
-                        x: hoveringLogout ? 10 : 0
-                    }}
+                    // animate={{
+                    //     x: hoveringLogout ? 10 : 0
+                    // }}
                 >logout</motion.h2>
             </motion.button>
         </div>
