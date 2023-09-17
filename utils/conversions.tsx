@@ -27,7 +27,12 @@ export const getMP4FromLink = (link: string) => {
         const videoId = videoIdWithChannel.split('&')[0]
         return `https://www.youtube.com/embed/${videoId}`
     } else if(link.includes('medal')) {
-
+        //medal.tv/clip/1sFeKyxf53xfWB/vpDJQpGH3?invite=cr-MSw2M0ksLA
+        //medal.tv/clips/1sFeKyxf53xfWB/vpDJQpGH3?invite=cr-MSw2M0ksLA
+        //find the word clips and replace it with clip
+        const characterIndex = link.indexOf('clips')
+        const newLink = link.substring(0, characterIndex) + 'clip' + link.substring(characterIndex + 5)
+        return newLink
     }
 }
 

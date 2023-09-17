@@ -10,6 +10,7 @@ import { createSelectArray } from '@/utils/conversions'
 import { useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 import ClipSubmissionPopup from '@/components/clip-submission-popup/ClipSubmissionPopup'
+import { getMP4FromLink } from '@/utils/conversions'
 
 const SubmitClip = () => {
 
@@ -23,24 +24,27 @@ const SubmitClip = () => {
 
     const [notAllFieldsFilled, setNotAllFieldsFilled] = useState<boolean>(false)
 
-    const [showThankyouModal, setShowThankyouModal] = useState<boolean>(true)
+    const [showThankyouModal, setShowThankyouModal] = useState<boolean>(false)
 
     const createClip = useMutation(api.clips.createClip)
 
     const handleSubmit = async () => {
-        if(!gameSelected || !rankSelected || !clipUrl || !name || !username) {
+        if (!gameSelected || !rankSelected || !clipUrl || !name || !username) {
             setNotAllFieldsFilled(true)
             return
         }
-        const clipId = createClip({
+        const clipId = await createClip({
             game: gameSelected.value,
             rank: rankSelected.value,
             link: clipUrl,
             nameCredit: name,
             username: username
         })
-        
-        
+
+        if (clipId) {
+            setShowThankyouModal(true)
+        }
+
     }
 
     return (
@@ -65,8 +69,14 @@ const SubmitClip = () => {
                         //@ts-ignore
                         onChange={(e) => setRankSelected(e)}
                     />
-                    <input className={styles["clip-input"]} placeholder="Clip url (twitch, youtube, medal)" />
-                    <input className={styles["clip-input"]} placeholder="Name for credit" />
+                    <input className={styles["clip-input"]}
+                        placeholder="Clip url (twitch clip, youtube, medal)"
+                        onChange={(e) => {
+                            setClipUrl(e.target.value)
+                            console.log(getMP4FromLink(e.target.value))
+                        }} 
+                    />
+                    <input className={styles["clip-input"]} onChange={(e) => setClipUrl(e.target.value)} placeholder="Name for credit" />
                     <input className={styles["clip-input"]} placeholder="Valorant username + tag ex. Cosmic#4473" />
                     <p className={styles.error}
                         onClick={() => setNotAllFieldsFilled(false)}

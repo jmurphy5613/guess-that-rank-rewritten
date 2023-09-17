@@ -46,8 +46,6 @@ const GameGrid = () => {
 
     const [gameHoveringIndex, setGameHoveringIndex] = useState(-1)
 
-    const router = useRouter()
-
     return (
         <div className={styles.grid}>
             {games.map((game, index) => (
