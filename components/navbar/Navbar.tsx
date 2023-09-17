@@ -1,6 +1,8 @@
 import styles from './Navbar.module.css'
 import Logo from '@/components/icons/Logo'
 import { useSession, signIn, signOut } from 'next-auth/react'
+import Image from 'next/image'
+import { useState } from 'react'
 
 const links = [
     {
@@ -21,6 +23,8 @@ const Navbar = () => {
 
     const { data: session } = useSession()
 
+    const [showPopup, setShowPopup] = useState(false)
+
     console.log(session)
 
 
@@ -37,10 +41,23 @@ const Navbar = () => {
                     ))}
                 </div>
             </div>
-            <div className={styles["auth-container"]}>
-                <button className={styles["signin-button"]} onClick={() => signOut()}>Sign out</button>
-                <button className={styles["signup-button"]} onClick={() => signIn()}>Sign In</button>
-            </div>
+            {session && session.user?.image ? (
+                <div className={styles["user-icon-container"]}>
+                    <Image 
+                        src={session.user.image}
+                        fill
+                        alt="User Icon"
+                        style={{ borderRadius: '100%' }}
+                    />
+                </div>
+            ) : (
+                <div className={styles["auth-container"]}>
+                    <button className={styles["signin-button"]} onClick={() => signOut()}>Sign out</button>
+                    <button className={styles["signup-button"]} onClick={() => signIn()}>Sign In</button>
+                </div>
+            )}
+
+
         </div>
     )
 }
