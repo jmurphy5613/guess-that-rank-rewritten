@@ -45,7 +45,7 @@ const SubmitClip = () => {
             link: clipUrl,
             nameCredit: name,
             username: username,
-            approved: false
+            isApproved: false
         })
 
         if (clipId) {

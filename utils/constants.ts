@@ -72,6 +72,47 @@ export const gameRanks: GameRanks = {
                 image: '/ranks/csgo/csgo-global.png'
             }
         ]
+    },
+    league: {
+        ranks: [
+            {
+                name: 'iron',
+                image: '/ranks/league/league-iron.png'
+            },
+            {
+                name: 'bronze',
+                image: '/ranks/league/league-bronze.png'
+            },
+            {
+                name: 'silver',
+                image: '/ranks/league/league-silver.png'
+
+            },
+            {
+                name: 'gold',
+                image: '/ranks/league/league-gold.png'
+            },
+            {
+                name: 'platinum',
+                image: '/ranks/league/league-platinum.png'
+            },
+            {
+                name: 'emerald',
+                image: '/ranks/league/league-emerald.png'
+            },
+            {
+                name: 'master',
+                image: '/ranks/league/league-master.png'
+            },
+            {
+                name: 'grandmaster',
+                image: '/ranks/league/league-grandmaster.png'
+            },
+            {
+                name: 'challenger',
+                image: '/ranks/league/league-challenger.png'
+            }
+        ]
     }
 }
 

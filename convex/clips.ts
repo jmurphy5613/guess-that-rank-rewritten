@@ -15,10 +15,10 @@ export const createClip = mutation({
         link: v.string(),
         nameCredit: v.string(),
         username: v.string(),
-        approved: v.boolean()
+        isApproved: v.boolean()
     },
     handler: async (ctx, args) => {
-        const clip = { game: args.game, rank: args.rank, link: args.link, nameCredit: args.nameCredit, username: args.username }
+        const clip = { game: args.game, rank: args.rank, link: args.link, nameCredit: args.nameCredit, username: args.username, isApproved: args.isApproved }
         const clipId = await ctx.db.insert("clips", clip)
         return clipId
     }

@@ -7,7 +7,8 @@ export default defineSchema({
         rank: v.string(),
         link: v.string(),
         nameCredit: v.string(),
-        username: v.string()
+        username: v.string(),
+        isApproved: v.boolean(),
     }),
     users: defineTable({
         username: v.string(),
