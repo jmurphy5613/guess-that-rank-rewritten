@@ -49,7 +49,10 @@ const Play = () => {
                 <div className={styles["ranks-container"]}>
                     {gameRanks[game].ranks.map((rank, index) => {
 
-                        const rankItemDimensions = getRankItemDimensions(gameRanks[game].ranks.length)
+                        let rankItemDimensions = getRankItemDimensions(gameRanks[game].ranks.length)
+                        let rankItemHeightMultiplier = gameRanks[game].imageSizeMultiplierHeight
+                        let rankItemWidthMultiplier = gameRanks[game].imageSizeMultiplierWidth
+                        const isCsgo = game === 'csgo'
 
                         return (
                             <div
@@ -62,7 +65,7 @@ const Play = () => {
                                     border: currentSelectedRank === index ? '1px solid #354AA1' : 'none'
                                 }}
                             >
-                                <div className={styles["rank-image-container"]} style={{ height: getRankItemImageDimensions(gameRanks[game].ranks.length), width: getRankItemImageDimensions(gameRanks[game].ranks.length) }}>
+                                <div className={styles["rank-image-container"]} style={{ height: `calc(${rankItemDimensions} * ${rankItemHeightMultiplier})`, width: `calc(${rankItemDimensions} * ${rankItemWidthMultiplier})` }}>
                                     <Image
                                         fill
                                         src={rank.image}

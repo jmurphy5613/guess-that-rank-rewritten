@@ -1,9 +1,11 @@
-export interface GameRanks {
+export interface GameData {
     [key: string]: {
         ranks: {
             name: string,
             image: string
-        }[]
+        }[],
+        imageSizeMultiplierHeight: number,
+        imageSizeMultiplierWidth: number
     }
 }
 

@@ -6,7 +6,7 @@ import { useState } from 'react'
 
 const games = [
     {
-        name: 'counter-strike',
+        name: 'csgo',
         backgroundImage: '/games/csgo.png',
         titleImage: '/games/csgoName.png',
         height: 89,
@@ -20,26 +20,26 @@ const games = [
         width: 222
     },
     {
-        name: 'league-of-legends',
+        name: 'league',
         backgroundImage: '/games/league.png',
         titleImage: '/games/leagueName.png',
         height: 102,
         width: 250
     },
     {
-        name: 'rocket-league',
+        name: 'rl',
         backgroundImage: '/games/rl.png',
         titleImage: '/games/rlName.png',
         height: 83,
         width: 186
     },
-    {
-        name: 'overwatch',
-        backgroundImage: '/games/overwatch.png',
-        titleImage: '/games/overwatchName.png',
-        width: 230,
-        height: 30,
-    },
+    // {
+    //     name: 'overwatch',
+    //     backgroundImage: '/games/overwatch.png',
+    //     titleImage: '/games/overwatchName.png',
+    //     width: 230,
+    //     height: 30,
+    // },
 ]
 
 const GameGrid = () => {
@@ -55,7 +55,7 @@ const GameGrid = () => {
                         style={{ backgroundImage: `url(${game.backgroundImage})`, backgroundPosition: 'center' }}
                         onMouseEnter={() => setGameHoveringIndex(index)}
                         onMouseLeave={() => setGameHoveringIndex(-1)}
-                        whileHover={{ scale: 1.01, transition: { duration: 0.1 } }}
+                        whileHover={{ scale: 1.01, transition: { duration: 0.01 } }}
                     >
                         <div className={styles["game-overlay"]} />
                         <motion.div

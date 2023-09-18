@@ -1,6 +1,6 @@
-import { GameRanks, ReactSelectType } from "./types"
+import { GameData } from "./types"
 
-export const gameRanks: GameRanks = {
+export const gameRanks: GameData = {
     valorant: {
         ranks: [
             {
@@ -35,7 +35,9 @@ export const gameRanks: GameRanks = {
                 name: 'radiant',
                 image: '/ranks/valorant/valorant-radiant.png'
             }
-        ]
+        ],
+        imageSizeMultiplierHeight: 0.7,
+        imageSizeMultiplierWidth: 0.7
     },
     csgo: {
         ranks: [
@@ -52,26 +54,28 @@ export const gameRanks: GameRanks = {
                 image: '/ranks/csgo/csgo-guardian.png'
             },
             {
-                name: 'mge',
-                image: '/ranks/csgo/csgo-ak.png'
-            },
-            {
                 name: 'dmg',
                 image: '/ranks/csgo/csgo-dmg.png'
             },
             {
                 name: 'eagle',
-                image: '/ranks/csgo/csgo-eagle.png'
+                image: '/ranks/csgo/csgo-le.png'
+            },
+            {
+                name: 'lem',
+                image: '/ranks/csgo/csgo-lem.png'
             },
             {
                 name: 'supreme',
-                image: '/ranks/csgo/csgo-supreme.png'
+                image: '/ranks/csgo/csgo-smfc.png'
             },
             {
                 name: 'global',
-                image: '/ranks/csgo/csgo-global.png'
+                image: '/ranks/csgo/csgo-ge.png'
             }
-        ]
+        ],
+        imageSizeMultiplierHeight: 0.4,
+        imageSizeMultiplierWidth: 0.9
     },
     league: {
         ranks: [
@@ -112,7 +116,47 @@ export const gameRanks: GameRanks = {
                 name: 'challenger',
                 image: '/ranks/league/league-challenger.png'
             }
-        ]
+        ],
+        imageSizeMultiplierHeight: 0.8,
+        imageSizeMultiplierWidth: 0.8
+    },
+    rl: {
+        ranks: [
+            {
+                name: 'bronze',
+                image: '/ranks/rl/rl-bronze.png'
+            },
+            {
+                name: 'silver',
+                image: '/ranks/rl/rl-silver.png'
+            },
+            {
+                name: 'gold',
+                image: '/ranks/rl/rl-gold.png'
+            },
+            {
+                name: 'platinum',
+                image: '/ranks/rl/rl-platinum.png'
+            },
+            {
+                name: 'diamond',
+                image: '/ranks/rl/rl-diamond.png'
+            },
+            {
+                name: 'champion',
+                image: '/ranks/rl/rl-champion.png'
+            },
+            {
+                name: 'grandchampion',
+                image: '/ranks/rl/rl-grandchampion.png'
+            },
+            {
+                name: 'ssl',
+                image: '/ranks/rl/rl-ssl.png'
+            }
+        ],
+        imageSizeMultiplierHeight: 1,
+        imageSizeMultiplierWidth: 1
     }
 }
 
