@@ -35,7 +35,7 @@ const SubmitClip = () => {
     const { data: session } = useSession()
 
     const currentUser = useQuery(api.users.getUserByEmail, {
-        email: session?.user?.email!
+        email: session?.user?.email || ''
     })
 
     const handleSubmit = async () => {
@@ -65,9 +65,10 @@ const SubmitClip = () => {
                 <div className={styles.container} style={{ display: 'flex', justifyContent: 'center', paddingBottom: '2rem' }}>
                     <h1 className={styles.title}>You must be <span className={styles.blue}>logged in</span> to submit a clip.</h1>
                 </div>
-            </> 
+            </>
         )
     }
+
 
     return (
         <>
@@ -77,6 +78,7 @@ const SubmitClip = () => {
             <div className={styles.container}>
                 <h1 className={styles.title}>Submit <span className={styles.blue}>your clip.</span></h1>
                 <div className={styles["form-container"]}>
+                    <label className={styles.label} style={{ marginTop: '0' }}>Game</label>
                     <Select
                         options={gameOptions}
                         placeholder="Select a game"
@@ -85,6 +87,7 @@ const SubmitClip = () => {
                         //@ts-ignore
                         onChange={(e) => setGameSelected(e)}
                     />
+                    <label className={styles.label}>Rank</label>
                     <Select
                         options={gameSelected && createSelectArray(gameSelected.value)}
                         placeholder="Select a rank"
@@ -92,6 +95,7 @@ const SubmitClip = () => {
                         //@ts-ignore
                         onChange={(e) => setRankSelected(e)}
                     />
+                    <label className={styles.label}>Clip Link</label>
                     <input className={styles["clip-input"]}
                         placeholder="Clip url (twitch clip, youtube, medal)"
                         onChange={(e) => {
@@ -99,6 +103,8 @@ const SubmitClip = () => {
                             console.log(getMP4FromLink(e.target.value))
                         }}
                     />
+
+                    <label className={styles.label}>Display Name</label>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <input className={styles["clip-input"]}
                             onChange={(e) => setName(e.target.value)}

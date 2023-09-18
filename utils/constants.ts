@@ -168,6 +168,14 @@ export const gameOptions = [
     {
         value: 'csgo',
         label: 'CS:GO'
+    },
+    {
+        value: 'league',
+        label: 'League of Legends'
+    },
+    {
+        value: 'rl',
+        label: 'Rocket League'
     }
 ]
 
@@ -231,7 +239,6 @@ export const selectStyles = {
     }),
     container: (provided: any, state: any) => ({
         ...provided,
-        marginTop: '1rem',
         borderRadius: '1rem',
         color: '#626262',
     }),
