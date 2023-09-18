@@ -7,12 +7,11 @@ import RightArrow from '@/components/icons/RightArrow'
 import { gameOptions, selectStyles } from '@/utils/constants'
 import { ReactSelectType } from '@/utils/types'
 import { createSelectArray } from '@/utils/conversions'
-import { useMutation } from 'convex/react'
+import { useMutation, useQuery } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 import ClipSubmissionPopup from '@/components/clip-submission-popup/ClipSubmissionPopup'
 import { getMP4FromLink } from '@/utils/conversions'
 import { useSession } from 'next-auth/react'
-import { emailToUsername } from '@/utils/conversions'
 import ChangeNamePopup from '@/components/change-name-popup/ChangeNamePopup'
 
 const SubmitClip = () => {
@@ -28,11 +27,16 @@ const SubmitClip = () => {
 
     const [notAllFieldsFilled, setNotAllFieldsFilled] = useState<boolean>(false)
     const [showThankyouModal, setShowThankyouModal] = useState<boolean>(false)
-    const [showNameChangeModal, setShowNameChangeModal] = useState<boolean>(true)
+    const [showNameChangeModal, setShowNameChangeModal] = useState<boolean>(false)
 
     const createClip = useMutation(api.clips.createClip)
 
+
     const { data: session } = useSession()
+
+    const currentUser = useQuery(api.users.getUserByEmail, {
+        email: session?.user?.email!
+    })
 
     const handleSubmit = async () => {
         if (!gameSelected || !rankSelected || !clipUrl || !name || !username) {
@@ -99,9 +103,9 @@ const SubmitClip = () => {
                         <input className={styles["clip-input"]}
                             onChange={(e) => setName(e.target.value)}
                             placeholder="Name for credit"
-                            value={emailToUsername(session.user?.email!)}
+                            value={currentUser?.username}
                         />
-                        <button className={styles["name-change-button"]}>Change Name</button>
+                        <button className={styles["name-change-button"]} onClick={() => setShowNameChangeModal(true)}>Change Name</button>
                     </div>
 
                     <p className={styles.error}

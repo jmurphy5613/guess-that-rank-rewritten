@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google"
 import GithubProvider from "next-auth/providers/github"
 import { ConvexHttpClient, BaseConvexClient } from "convex/browser";
 import { api } from '@/convex/_generated/api'
+import { emailToUsername } from "@/utils/conversions";
 
 export const authOptions: NextAuthOptions = {
     // https://next-auth.js.org/configuration/providers/oauth
@@ -25,8 +26,8 @@ export const authOptions: NextAuthOptions = {
             if(user && user.email && user.name) {
                 const httpClient = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
                 httpClient.query(api.users.getUserByUsername, { email: user.email }).then((currentUser) => {
-                    if(!currentUser) {
-                        httpClient.mutation(api.users.createUser, { username: user.name!, email: user.email! })
+                    if(!currentUser && user.email) {
+                        httpClient.mutation(api.users.createUser, { username: emailToUsername(user.email), email: user.email })
                     }
                 });
             }
