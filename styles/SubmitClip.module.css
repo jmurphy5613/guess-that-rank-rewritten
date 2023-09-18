@@ -40,6 +40,7 @@
     margin-top: 1rem;
     padding-left: 1rem;
     border-radius: 1rem;
+    width: 100%;
 }
 
 .submit-button {
@@ -75,4 +76,21 @@
     font-weight: 400;
     margin-top: 0.5rem;
     height: 1rem;
+}
+
+.name-change-button {
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #354AA1;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 12rem;
+    margin-left: 1.1rem;
+    font-family: "Outfit", sans-serif;
+    font-weight: 400;
+    color: white;
 }

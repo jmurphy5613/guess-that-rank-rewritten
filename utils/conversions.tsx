@@ -16,6 +16,11 @@ export const createSelectArray = (game: string) => {
     return selectValues
 }
 
+export const emailToUsername = (email: string) => {
+    const split = email.split('@')
+    return split[0]
+}
+
 export const getMP4FromLink = (link: string) => {
     if(link.includes('twitch')) {
         const split = link.split('/')

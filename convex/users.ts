@@ -29,4 +29,17 @@ export const getUserByUsername = query({
     }
 })
 
+export const changeUserName = mutation({
+    args: {
+        newUsername: v.string(),
+        email: v.string()
+    },
+    handler: async (ctx, args) => {
+        const user = await ctx.db.query("users").filter((item) => item.eq(item.field("email"), args.email)).first()
+        if(user === null) return
+        const userId = await ctx.db.patch(user._id, { username: args.newUsername })
+        return userId
+    }
+})
+
 

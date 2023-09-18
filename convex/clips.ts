@@ -14,7 +14,8 @@ export const createClip = mutation({
         rank: v.string(),
         link: v.string(),
         nameCredit: v.string(),
-        username: v.string()
+        username: v.string(),
+        approved: v.boolean()
     },
     handler: async (ctx, args) => {
         const clip = { game: args.game, rank: args.rank, link: args.link, nameCredit: args.nameCredit, username: args.username }
