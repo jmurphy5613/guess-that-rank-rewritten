@@ -39,7 +39,7 @@ const SubmitClip = () => {
     })
 
     const handleSubmit = async () => {
-        if (!gameSelected || !rankSelected || !clipUrl || !name || !username) {
+        if (!gameSelected || !rankSelected || !clipUrl || !currentUser?._id) {
             setNotAllFieldsFilled(true)
             return
         }
@@ -47,9 +47,9 @@ const SubmitClip = () => {
             game: gameSelected.value,
             rank: rankSelected.value,
             link: clipUrl,
-            nameCredit: name,
-            username: username,
-            isApproved: false
+            isApproved: false,
+            userId: currentUser._id,
+            rejected: false,
         })
 
         if (clipId) {
@@ -100,7 +100,6 @@ const SubmitClip = () => {
                         placeholder="Clip url (twitch clip, youtube, medal)"
                         onChange={(e) => {
                             setClipUrl(e.target.value)
-                            console.log(getMP4FromLink(e.target.value))
                         }}
                     />
 

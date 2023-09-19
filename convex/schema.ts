@@ -6,9 +6,9 @@ export default defineSchema({
         game: v.string(),
         rank: v.string(),
         link: v.string(),
-        nameCredit: v.string(),
-        username: v.string(),
         isApproved: v.boolean(),
+        rejected: v.boolean(),
+        userId: v.id("users"),
     }),
     users: defineTable({
         username: v.string(),
