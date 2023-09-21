@@ -12,9 +12,12 @@ interface PostGuessPopupProps {
     guessedRank: string;
     correctRank: string;
     game: string;
+    overallPoints: number;
+    currentGamePoints: number;
 }
 
-const PostGuessPopup: React.FC<PostGuessPopupProps> = ({ setShowPostGuessPopup, guessedRank, correctRank, game }) => {
+const PostGuessPopup: React.FC<PostGuessPopupProps> = 
+    ({ setShowPostGuessPopup, guessedRank, correctRank, game, currentGamePoints, overallPoints }) => {
 
     const [showArrow, setShowArrow] = useState<boolean>(false)
     const [hoveringNext, setHoveringNext] = useState<boolean>(false)
@@ -62,7 +65,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> = ({ setShowPostGuessPopup, 
                         <div className={styles["count-up-wrapper"]}>
                             <CountUp
                                 start={0}
-                                end={50}
+                                end={currentGamePoints}
                                 className={styles["count-up"]}
                                 onEnd={() => {
                                     setShowArrow(true)
@@ -81,13 +84,13 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> = ({ setShowPostGuessPopup, 
                                 {showArrow && <UpArrow stroke="#6EF36B" />}
                             </motion.div>
                         </div>
-                        <h3 className={styles.description}>Valorant Points</h3>
+                        <h3 className={styles.description}>{game} Points</h3>
                     </div>
                     <div className={styles.stat} style={{ marginLeft: '0.5rem' }}>
                         <div className={styles["count-up-wrapper"]}>
                             <CountUp
                                 start={0}
-                                end={96}
+                                end={overallPoints}
                                 className={styles["count-up"]}
                                 onCompleteCallback={() => {
                                     setShowArrow(true)

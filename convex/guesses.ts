@@ -17,13 +17,27 @@ export const createGuess = mutation({
     }
 })
 
-export const getGuessNumber = query({
+export const getGuessStats = query({
     args: {
         userId: v.id("users"),
-        game: v.string()
+        currentGame: v.string()
     },
     handler: async (ctx, args) => {
-        const applicableGuesses = await ctx.db.query("guesses").filter((item) => item.eq(item.field("userId"), args.userId) && item.eq(item.field("game"), args.game)).collect()
-        return applicableGuesses.length + 1
+        let overallPoints = 0
+        let gamePoints = 0
+        let currentGameGuesses = 0
+        const allGuesses = await ctx.db.query("guesses").filter((item) => item.eq(item.field("userId"), args.userId)).collect()
+        for(const guesses of allGuesses) {
+            if(guesses.rankGuessed === guesses.correctRank) {
+                overallPoints += 1
+                if(guesses.game === args.currentGame) {
+                    gamePoints += 1
+                }
+            }
+            if(guesses.game === args.currentGame) {
+                currentGameGuesses += 1
+            }
+        }
+        return { overallPoints: overallPoints, gamePoints: gamePoints, currentGameGuessNumber: currentGameGuesses+1 }
     },
 })

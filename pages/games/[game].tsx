@@ -10,7 +10,7 @@ import { gameRanks } from '@/utils/constants'
 import { useMutation, useQuery } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 import { useSession } from 'next-auth/react'
-import { createLocalGuess, getLocalGuessedClipIds, getLocalGuessNumber } from '@/utils/localRequests'
+import { createLocalGuess, getLocalGuessedClipIds, getLocalGuessStats } from '@/utils/localRequests'
 import { Id } from '@/convex/_generated/dataModel'
 
 
@@ -41,17 +41,27 @@ const Play = () => {
         email: session?.user?.email
     }:  "skip")
 
-    const guessNumber = useQuery(api.guesses.getGuessNumber, game && user ? {
+    const userGuessingStats = useQuery(api.guesses.getGuessStats, game && user ? {
         userId: user._id,
-        game: game
+        currentGame: game
     } : "skip")
-
-
 
     const createGuess = useMutation(api.guesses.createGuess)
 
+    const [latestCorrectRank, setLatestCorrectRank] = useState<string>("")
+
+    const reserveLastCorrectRank = () => {
+        if(userClips) {
+            setLatestCorrectRank(userClips[currentIndex].rank)
+        } else if(guestUserClips) {
+            setLatestCorrectRank(guestUserClips[currentIndex].rank)
+        }
+    }
+
     const onGuessSubmit = async () => {
         if(!currentSelectedRank || !game) return
+
+
         if(userClips && user) {
             await createGuess({
                 userId: user._id,
@@ -91,15 +101,15 @@ const Play = () => {
     }
 
     const currentClip = userClips ? userClips[currentIndex] : guestUserClips && guestUserClips[currentIndex]
-    const totalGuesses = guessNumber ? guessNumber : getLocalGuessNumber(game)
+    const guessingStats = userGuessingStats ? userGuessingStats : getLocalGuessStats(game)
 
 
     return (
         <>
-            {showPostGuessPopup && <PostGuessPopup game={game} correctRank={currentClip?.rank!} guessedRank={currentSelectedRank ? gameRanks[game].ranks[currentSelectedRank].name : 'none'} setShowPostGuessPopup={setShowPostGuessPopup} />}
+            {showPostGuessPopup && <PostGuessPopup currentGamePoints={guessingStats.gamePoints} overallPoints={guessingStats.overallPoints} game={game} correctRank={latestCorrectRank} guessedRank={currentSelectedRank ? gameRanks[game].ranks[currentSelectedRank].name : 'none'} setShowPostGuessPopup={setShowPostGuessPopup} />}
             <Navbar />
             <div className={styles.container}>
-                <h2 className={styles["guess-name"]}>Guess <span style={{ color: '#354AA1' }}>#{totalGuesses}</span></h2>
+                <h2 className={styles["guess-name"]}>Guess <span style={{ color: '#354AA1' }}>#{guessingStats.currentGameGuessNumber}</span></h2>
                 <div className={styles["embed-container"]}>
                     <iframe style={{ border: 'none' }} width="100%" height="100%" src={currentClip?.link} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
                 </div>
@@ -139,9 +149,8 @@ const Play = () => {
                     whileHover={{ scale: 1.1 }}
                     onClick={() => {
                         setShowPostGuessPopup(true)
-                        setTimeout(() => {
-                            onGuessSubmit()
-                        }, 500)
+                        reserveLastCorrectRank()
+                        onGuessSubmit()
                     }}
                 >
                     <motion.h2
