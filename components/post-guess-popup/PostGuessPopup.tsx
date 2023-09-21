@@ -15,10 +15,11 @@ interface PostGuessPopupProps {
     overallPoints: number;
     currentGamePoints: number;
     clipAuthor: string;
+    isGuest?: boolean;
 }
 
 const PostGuessPopup: React.FC<PostGuessPopupProps> =
-    ({ setShowPostGuessPopup, guessedRank, correctRank, game, currentGamePoints, overallPoints, clipAuthor }) => {
+    ({ setShowPostGuessPopup, guessedRank, correctRank, game, currentGamePoints, overallPoints, clipAuthor, isGuest }) => {
 
         const [showArrow, setShowArrow] = useState<boolean>(false)
         const [hoveringNext, setHoveringNext] = useState<boolean>(false)
@@ -81,7 +82,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
                             <div className={styles["count-up-wrapper"]}>
                                 <CountUp
                                     start={0}
-                                    end={currentGamePoints}
+                                    end={isGuest && (guessedRank === correctRank) ? currentGamePoints+1 : currentGamePoints}
                                     className={styles["count-up"]}
                                     onEnd={() => {
                                         if(correctRank === guessedRank) setShowArrow(true)
@@ -106,7 +107,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
                             <div className={styles["count-up-wrapper"]}>
                                 <CountUp
                                     start={0}
-                                    end={overallPoints}
+                                    end={isGuest && (guessedRank === correctRank) ? overallPoints+1 : overallPoints}
                                     className={styles["count-up"]}
                                     onEnd={() =>  {
                                         if(correctRank === guessedRank) setShowArrow(true)
