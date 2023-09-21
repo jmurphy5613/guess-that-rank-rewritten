@@ -49,9 +49,6 @@ const Navbar = () => {
 
     const [showPopup, setShowPopup] = useState(false)
 
-    console.log(session)
-
-
     return (
         <div className={styles.container}>
             <div className={styles["left"]}>

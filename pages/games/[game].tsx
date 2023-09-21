@@ -7,6 +7,9 @@ import { motion } from 'framer-motion'
 import RightArrow from '@/components/icons/RightArrow'
 import PostGuessPopup from '@/components/post-guess-popup/PostGuessPopup'
 import { gameRanks } from '@/utils/constants'
+import { useQuery } from 'convex/react'
+import { api } from '@/convex/_generated/api'
+import { useSession } from 'next-auth/react'
 
 
 const Play = () => {
@@ -18,6 +21,19 @@ const Play = () => {
     const [hoveringLockInt, setHoveringLockInt] = useState<boolean>()
     const [currentSelectedRank, setCurrentSelectedRank] = useState<number>()
     const [showPostGuessPopup, setShowPostGuessPopup] = useState<boolean>(false)
+    const [currentIndex, setCurrentIndex] = useState<number>(0)
+
+    const { data: session } = useSession()
+
+    const userClips = useQuery(api.clips.getLateststNotGuessedClip, game && session?.user?.email ? {
+        email: session?.user?.email,
+        game: game
+    } : "skip")
+
+    const guestUserClips = useQuery(api.clips.getLastestNotGuessedClipGuest, game && session === null ? {
+        game: game,
+        alreadyGuessedClips: []
+    } : "skip")
 
     useEffect(() => {
         if (router.isReady) {
@@ -29,13 +45,9 @@ const Play = () => {
         return `calc((60vw - ${length - 1}rem) / ${length})`
     }
 
-    const getRankItemImageDimensions = (length: number) => {
-        return `calc((60vw - ${length - 1}rem) / ${length} / 1.4)`
-    }
+    if (!game || !(userClips || guestUserClips)) return <></>
 
-    if (!game) return <></>
-
-    console.log(game, gameRanks[game].ranks)
+    const currentClip = userClips ? userClips[currentIndex] : guestUserClips && guestUserClips[currentIndex]
 
     return (
         <>
@@ -44,7 +56,7 @@ const Play = () => {
             <div className={styles.container}>
                 <h2 className={styles["guess-name"]}>Guess <span style={{ color: '#354AA1' }}>#42</span></h2>
                 <div className={styles["embed-container"]}>
-                    <iframe style={{ border: 'none' }} width="100%" height="100%" src="https://www.youtube.com/embed/A79AoUqD8Do?si=jJGnsv-kJ-0LnhlA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
+                    <iframe style={{ border: 'none' }} width="100%" height="100%" src={currentClip?.link} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
                 </div>
                 <div className={styles["ranks-container"]}>
                     {gameRanks[game].ranks.map((rank, index) => {
@@ -52,7 +64,6 @@ const Play = () => {
                         let rankItemDimensions = getRankItemDimensions(gameRanks[game].ranks.length)
                         let rankItemHeightMultiplier = gameRanks[game].imageSizeMultiplierHeight
                         let rankItemWidthMultiplier = gameRanks[game].imageSizeMultiplierWidth
-                        const isCsgo = game === 'csgo'
 
                         return (
                             <div

@@ -13,7 +13,6 @@ export default defineSchema({
     users: defineTable({
         username: v.string(),
         email: v.string(),
-        clips: v.array(v.id("clips")),
     }),
     guesses: defineTable({
         clipId: v.id("clips"),
@@ -22,5 +21,5 @@ export default defineSchema({
         rankGuessed: v.string(),
         correctRank: v.string(),
         isCorrect: v.boolean(),
-    })
+    }),
 })

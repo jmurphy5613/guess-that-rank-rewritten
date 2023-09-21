@@ -10,7 +10,6 @@ import { createSelectArray } from '@/utils/conversions'
 import { useMutation, useQuery } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 import ClipSubmissionPopup from '@/components/clip-submission-popup/ClipSubmissionPopup'
-import { getMP4FromLink } from '@/utils/conversions'
 import { useSession } from 'next-auth/react'
 import ChangeNamePopup from '@/components/change-name-popup/ChangeNamePopup'
 

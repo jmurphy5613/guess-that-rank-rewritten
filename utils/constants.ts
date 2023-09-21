@@ -248,3 +248,150 @@ export const selectStyles = {
     })
 
 }
+
+export const seedClipData = [
+    {
+        "game": "valorant",
+        "rank": "diamond",
+        "link": "https://medal.tv/games/valorant/clip/48DYfcJ3apGhN/d1337WhvKtrP",
+        "isApproved": false,
+        "rejected": false,
+        "name": "ludacris"
+    },
+    {
+        "game": "valorant",
+        "rank": "gold",
+        "link": "https://medal.tv/games/valorant/clip/s2Dl4JPFebhO3",
+        "isApproved": false,
+        "rejected": false,
+        "name": "ChinTangWang"
+    },
+    {
+        "game": "valorant",
+        "rank": "diamond",
+        "link": "https://medal.tv/games/valorant/clip/q5X5Ieq5MJDVw/d13374quFARF",
+        "isApproved": false,
+        "rejected": false,
+        "name": "Soul"
+    },
+    {
+        "game": "valorant",
+        "rank": "gold",
+        "link": "https://medal.tv/games/valorant/clip/a5yCjkqvogUv9/d13376D17r8s",
+        "isApproved": false,
+        "rejected": false,
+        "name": "Pran"
+    },
+    {
+        "game": "valorant",
+        "rank": "gold",
+        "link": "https://medal.tv/games/valorant/clip/gxyXihE8iKyzF/d1337pafoz9t",
+        "name": "Pran",
+        "isApproved": false,
+        "rejected": false
+    },
+    {
+        "game": "valorant",
+        "rank": "ascendant",
+        "link": "https://medal.tv/games/valorant/clip/s0SgeNG5cbMzU/abcdefghijkl",
+        "isApproved": false,
+        "rejected": false,
+        "name": "Reconshire"
+    },
+    {
+        "game": "valorant",
+        "rank": "immortal",
+        "link": "https://medal.tv/games/valorant/clip/se88Haw6gxbr-/abcdefghijkl",
+        "isApproved": false,
+        "rejected": false,
+        "name": "Electives"
+    },
+    {
+        "game": "valorant",
+        "rank": "immortal",
+        "link": "https://medal.tv/games/valorant/clip/pmK1j2fQZnXjv/abcdefghijkl",
+        "isApproved": false,
+        "rejected": false,
+        "name": "ripbenjii"
+    },
+    {
+        "game": "valorant",
+        "rank": "immortal",
+        "link": "https://medal.tv/games/valorant/clip/mNZV3vw0IZjVi/KWenIjTL77DP",
+        "isApproved": false,
+        "rejected": false,
+        "name": "Mayynic"
+    },
+    {
+        "game": "valorant",
+        "rank": "ascendant",
+        "link": "https://medal.tv/games/valorant/clip/rMdcWJYf0ShQP/d1337Ae45grk",
+        "isApproved": false,
+        "rejected": false,
+        "name": "jandro"
+    },
+    {
+        "game": "valorant",
+        "rank": "platinum",
+        "link": "https://medal.tv/games/valorant/clip/n1MZv3yBeLBap/d1337gJXUuaX",
+        "isApproved": false,
+        "rejected": false,
+        "name": "robertobidartt"
+    },
+    {
+        "game": "valorant",
+        "rank": "diamond",
+        "link": "https://medal.tv/games/valorant/clip/srADNSRChrqa5/d1337QJA0TQg",
+        "isApproved": false,
+        "rejected": false,
+        "name": "Soul"
+    },
+    {
+        "game": "valorant",
+        "rank": "immortal",
+        "link": "https://medal.tv/games/valorant/clip/stWftB57FZj1r/d1337lj7GK0z",
+        "isApproved": false,
+        "rejected": false,
+        "name": "tobias.j.kirkham"
+    },
+    {
+        "game": "valorant",
+        "rank": "diamond",
+        "link": "https://medal.tv/games/valorant/clip/rvdhii-er5VZF/gFycE5uuS",
+        "isApproved": false,
+        "rejected": false,
+        "name": "GigaZippi"
+    },
+    {
+        "game": "valorant",
+        "rank": "diamond",
+        "link": "https://medal.tv/games/valorant/clip/pYJYVbdZa9-nM/9ox3P8kCo",
+        "isApproved": false,
+        "rejected": false,
+        "name": "GigaZippi"
+    },
+    {
+        "game": "valorant",
+        "rank": "immortal",
+        "link": "https://medal.tv/games/valorant/clip/tDwNabzc_Kxu-",
+        "isApproved": false,
+        "rejected": false,
+        "name": "whifph"
+    },
+    {
+        "game": "valorant",
+        "rank": "radiant",
+        "link": "https://medal.tv/games/valorant/clip/rElBjFbVFtqfw/d1337yb1x1U0",
+        "isApproved": false,
+        "rejected": false,
+        "name": "Sen Killua"
+    },
+    {
+        "game": "valorant",
+        "rank": "silver",
+        "link": "https://medal.tv/games/valorant/clip/rKlOsRuWPutJ1/131ygwt7SH7C",
+        "isApproved": false,
+        "rejected": false,
+        "name": "mommy"
+    }
+]
