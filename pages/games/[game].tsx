@@ -54,15 +54,17 @@ const Play = () => {
 
     const [latestCorrectRank, setLatestCorrectRank] = useState<string>("")
     const [latestClipAuthor, setLatestClipAuthor] = useState<string>("")
+    const [latestGuessedRank, setLatestGuessedRank] = useState<string>("")
 
     const stashData = () => {
+        if(!game || !currentSelectedRank) return
         if(userClips) {
             setLatestCorrectRank(userClips[currentIndex].rank)
-            setLatestClipAuthor(clipCreatorUser?.username || '')
         } else if(guestUserClips) {
             setLatestCorrectRank(guestUserClips[currentIndex].rank)
-            setLatestClipAuthor(clipCreatorUser?.username || '')
         }
+        setLatestGuessedRank(gameRanks[game].ranks[currentSelectedRank].name)
+        setLatestClipAuthor(clipCreatorUser?.username || '')
     }
 
     const onGuessSubmit = async () => {
@@ -113,7 +115,15 @@ const Play = () => {
 
     return (
         <>
-            {showPostGuessPopup && <PostGuessPopup isGuest={session === null} clipAuthor={latestClipAuthor} currentGamePoints={guessingStats.gamePoints} overallPoints={guessingStats.overallPoints} game={game} correctRank={latestCorrectRank} guessedRank={currentSelectedRank ? gameRanks[game].ranks[currentSelectedRank].name : 'none'} setShowPostGuessPopup={setShowPostGuessPopup} />}
+            {showPostGuessPopup && <PostGuessPopup 
+                isGuest={session === null} 
+                clipAuthor={latestClipAuthor} 
+                currentGamePoints={guessingStats.gamePoints} 
+                overallPoints={guessingStats.overallPoints} 
+                game={game} correctRank={latestCorrectRank} 
+                guessedRank={latestGuessedRank}
+                setShowPostGuessPopup={setShowPostGuessPopup} 
+            />}
             <Navbar />
             <div className={styles.container}>
                 <h2 className={styles["guess-name"]}>Guess <span style={{ color: '#354AA1' }}>#{guessingStats.currentGameGuessNumber}</span></h2>
