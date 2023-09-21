@@ -5,12 +5,16 @@ import CountUp from 'react-countup';
 import UpArrow from '../icons/UpArrow';
 import { useState } from 'react';
 import RightArrow from '../icons/RightArrow';
+import { gameRanks } from '@/utils/constants';
 
 interface PostGuessPopupProps {
     setShowPostGuessPopup: (show: boolean) => void;
+    guessedRank: string;
+    correctRank: string;
+    game: string;
 }
 
-const PostGuessPopup: React.FC<PostGuessPopupProps> = ({ setShowPostGuessPopup }) => {
+const PostGuessPopup: React.FC<PostGuessPopupProps> = ({ setShowPostGuessPopup, guessedRank, correctRank, game }) => {
 
     const [showArrow, setShowArrow] = useState<boolean>(false)
     const [hoveringNext, setHoveringNext] = useState<boolean>(false)
@@ -36,7 +40,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> = ({ setShowPostGuessPopup }
                         <h2 className={styles["wrong-title"]}>Wrong Answer</h2>
                         <div className={styles["rank-container"]}>
                             <Image
-                                src="/ranks/valorant/valorant-iron.png"
+                                src={gameRanks[game].ranks.find(rank => rank.name === guessedRank)?.image!}
                                 fill
                                 alt="Valorant Iron Rank"
                             />
@@ -46,7 +50,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> = ({ setShowPostGuessPopup }
                         <h2 className={styles["correct-title"]}>Correct Answer</h2>
                         <div className={styles["rank-container"]}>
                             <Image
-                                src="/ranks/valorant/valorant-diamond.png"
+                                src={gameRanks[game].ranks.find(rank => rank.name === correctRank)?.image!}
                                 fill
                                 alt="Valorant Iron Rank"
                             />

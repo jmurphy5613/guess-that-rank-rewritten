@@ -19,7 +19,6 @@ export default defineSchema({
         userId: v.id("users"),
         game: v.string(),
         rankGuessed: v.string(),
-        correctRank: v.string(),
-        isCorrect: v.boolean(),
+        correctRank: v.string()
     }),
 })

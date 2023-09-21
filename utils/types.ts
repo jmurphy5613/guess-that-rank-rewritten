@@ -13,3 +13,10 @@ export interface ReactSelectType {
     label: string,
     value: string
 }
+
+export interface Guess {
+    clipId: string,
+    game: string,
+    rankGuessed: string,
+    correctRank: string
+}

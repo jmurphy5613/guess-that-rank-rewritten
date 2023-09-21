@@ -14,7 +14,7 @@ export const createUser = mutation({
         email: v.string(),
     },
     handler: async (ctx, args) => {
-        const user = { username: args.username, email: args.email, clips: [] }
+        const user = { username: args.username, email: args.email }
         const userId = await ctx.db.insert("users", user)
         return userId
     }

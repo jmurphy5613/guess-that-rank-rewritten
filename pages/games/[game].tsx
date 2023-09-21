@@ -7,9 +7,11 @@ import { motion } from 'framer-motion'
 import RightArrow from '@/components/icons/RightArrow'
 import PostGuessPopup from '@/components/post-guess-popup/PostGuessPopup'
 import { gameRanks } from '@/utils/constants'
-import { useQuery } from 'convex/react'
+import { useMutation, useQuery } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 import { useSession } from 'next-auth/react'
+import { createLocalGuess, getLocalGuessedClipIds, getLocalGuessNumber } from '@/utils/localRequests'
+import { Id } from '@/convex/_generated/dataModel'
 
 
 const Play = () => {
@@ -32,8 +34,36 @@ const Play = () => {
 
     const guestUserClips = useQuery(api.clips.getLastestNotGuessedClipGuest, game && session === null ? {
         game: game,
-        alreadyGuessedClips: []
+        alreadyGuessedClips: getLocalGuessedClipIds(game) as Id<"clips">[]
     } : "skip")
+
+    const user = useQuery(api.users.getUserByEmail, session?.user?.email ? {
+        email: session?.user?.email
+    }:  "skip")
+
+    const guessNumber = useQuery(api.guesses.getGuessNumber, game && user ? {
+        userId: user._id,
+        game: game
+    } : "skip")
+
+
+
+    const createGuess = useMutation(api.guesses.createGuess)
+
+    const onGuessSubmit = async () => {
+        if(!currentSelectedRank || !game) return
+        if(userClips && user) {
+            await createGuess({
+                userId: user._id,
+                clipId: userClips[currentIndex]._id,
+                game: game,
+                rankGuessed: gameRanks[game].ranks[currentSelectedRank].name,
+                correctRank: userClips[currentIndex].rank
+            })
+        } else if (guestUserClips) {
+            createLocalGuess(guestUserClips[currentIndex]._id, gameRanks[game].ranks[currentSelectedRank].name, guestUserClips[currentIndex].rank, game)
+        }
+    }
 
     useEffect(() => {
         if (router.isReady) {
@@ -47,14 +77,29 @@ const Play = () => {
 
     if (!game || !(userClips || guestUserClips)) return <></>
 
+    if(userClips?.length === 0 || guestUserClips?.length === 0) {
+        return (
+            <>
+                <Navbar />
+                <div className={styles.container}>
+                    <h1 className={styles.title}>Out of clips for this game :(</h1>
+                    <p className={styles.suggestion}>you should submit one!</p>
+                </div>
+            </>
+
+        )
+    }
+
     const currentClip = userClips ? userClips[currentIndex] : guestUserClips && guestUserClips[currentIndex]
+    const totalGuesses = guessNumber ? guessNumber : getLocalGuessNumber(game)
+
 
     return (
         <>
-            {showPostGuessPopup && <PostGuessPopup setShowPostGuessPopup={setShowPostGuessPopup} />}
+            {showPostGuessPopup && <PostGuessPopup game={game} correctRank={currentClip?.rank!} guessedRank={currentSelectedRank ? gameRanks[game].ranks[currentSelectedRank].name : 'none'} setShowPostGuessPopup={setShowPostGuessPopup} />}
             <Navbar />
             <div className={styles.container}>
-                <h2 className={styles["guess-name"]}>Guess <span style={{ color: '#354AA1' }}>#42</span></h2>
+                <h2 className={styles["guess-name"]}>Guess <span style={{ color: '#354AA1' }}>#{totalGuesses}</span></h2>
                 <div className={styles["embed-container"]}>
                     <iframe style={{ border: 'none' }} width="100%" height="100%" src={currentClip?.link} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
                 </div>
@@ -92,7 +137,12 @@ const Play = () => {
                     onMouseEnter={() => setHoveringLockInt(true)}
                     onMouseLeave={() => setHoveringLockInt(false)}
                     whileHover={{ scale: 1.1 }}
-                    onClick={() => setShowPostGuessPopup(true)}
+                    onClick={() => {
+                        setShowPostGuessPopup(true)
+                        setTimeout(() => {
+                            onGuessSubmit()
+                        }, 500)
+                    }}
                 >
                     <motion.h2
                         className={styles["button-text"]}
