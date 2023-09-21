@@ -28,6 +28,10 @@ export const gameRanks: GameData = {
                 image: '/ranks/valorant/valorant-diamond.png'
             },
             {
+                name: 'ascendant',
+                image: '/ranks/valorant/valorant-ascendant.png'
+            },
+            {
                 name: 'immortal',
                 image: '/ranks/valorant/valorant-immortal.png'
             },

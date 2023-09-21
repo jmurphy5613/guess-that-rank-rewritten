@@ -46,15 +46,22 @@ const Play = () => {
         currentGame: game
     } : "skip")
 
+    const clipCreatorUser = useQuery(api.users.getUserById, userClips?.length || guestUserClips?.length ? {
+        userId: userClips ? userClips[currentIndex].userId : guestUserClips![currentIndex].userId
+    } : "skip")
+
     const createGuess = useMutation(api.guesses.createGuess)
 
     const [latestCorrectRank, setLatestCorrectRank] = useState<string>("")
+    const [latestClipAuthor, setLatestClipAuthor] = useState<string>("")
 
-    const reserveLastCorrectRank = () => {
+    const stashData = () => {
         if(userClips) {
             setLatestCorrectRank(userClips[currentIndex].rank)
+            setLatestClipAuthor(clipCreatorUser?.username || '')
         } else if(guestUserClips) {
             setLatestCorrectRank(guestUserClips[currentIndex].rank)
+            setLatestClipAuthor(clipCreatorUser?.username || '')
         }
     }
 
@@ -106,7 +113,7 @@ const Play = () => {
 
     return (
         <>
-            {showPostGuessPopup && <PostGuessPopup currentGamePoints={guessingStats.gamePoints} overallPoints={guessingStats.overallPoints} game={game} correctRank={latestCorrectRank} guessedRank={currentSelectedRank ? gameRanks[game].ranks[currentSelectedRank].name : 'none'} setShowPostGuessPopup={setShowPostGuessPopup} />}
+            {showPostGuessPopup && <PostGuessPopup clipAuthor={latestClipAuthor} currentGamePoints={guessingStats.gamePoints} overallPoints={guessingStats.overallPoints} game={game} correctRank={latestCorrectRank} guessedRank={currentSelectedRank ? gameRanks[game].ranks[currentSelectedRank].name : 'none'} setShowPostGuessPopup={setShowPostGuessPopup} />}
             <Navbar />
             <div className={styles.container}>
                 <h2 className={styles["guess-name"]}>Guess <span style={{ color: '#354AA1' }}>#{guessingStats.currentGameGuessNumber}</span></h2>
@@ -149,8 +156,15 @@ const Play = () => {
                     whileHover={{ scale: 1.1 }}
                     onClick={() => {
                         setShowPostGuessPopup(true)
-                        reserveLastCorrectRank()
-                        onGuessSubmit()
+                        stashData()
+                        if(guestUserClips) {
+                            setTimeout(() => {
+                                onGuessSubmit()
+                            }, 500)
+                        }
+                        else {
+                            onGuessSubmit()
+                        }
                     }}
                 >
                     <motion.h2

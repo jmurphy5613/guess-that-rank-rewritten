@@ -14,10 +14,11 @@ interface PostGuessPopupProps {
     game: string;
     overallPoints: number;
     currentGamePoints: number;
+    clipAuthor: string;
 }
 
 const PostGuessPopup: React.FC<PostGuessPopupProps> =
-    ({ setShowPostGuessPopup, guessedRank, correctRank, game, currentGamePoints, overallPoints }) => {
+    ({ setShowPostGuessPopup, guessedRank, correctRank, game, currentGamePoints, overallPoints, clipAuthor }) => {
 
         const [showArrow, setShowArrow] = useState<boolean>(false)
         const [hoveringNext, setHoveringNext] = useState<boolean>(false)
@@ -83,7 +84,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
                                     end={currentGamePoints}
                                     className={styles["count-up"]}
                                     onEnd={() => {
-                                        setShowArrow(true)
+                                        if(correctRank === guessedRank) setShowArrow(true)
                                     }}
                                 />
                                 <motion.div
@@ -107,8 +108,8 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
                                     start={0}
                                     end={overallPoints}
                                     className={styles["count-up"]}
-                                    onCompleteCallback={() => {
-                                        setShowArrow(true)
+                                    onEnd={() =>  {
+                                        if(correctRank === guessedRank) setShowArrow(true)
                                     }}
                                 />
                                 <motion.div
@@ -129,7 +130,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
                         </div>
                     </div>
                     <div className={styles.footer}>
-                        <h2 className={styles.credit}>Clip Credit: <span className={styles.blue}>Cosmic</span></h2>
+                        <h2 className={styles.credit}>Clip Credit: <span className={styles.blue}>{clipAuthor}</span></h2>
                         <motion.button
                             className={styles["submit-button"]}
                             onMouseEnter={() => setHoveringNext(true)}

@@ -83,7 +83,7 @@ export const getLateststNotGuessedClip = query({
     },
     handler: async (ctx, args) => {
         const user = await ctx.db.query("users").filter((item) => item.eq(item.field("email"), args.email)).first()
-        const possibleClips = await ctx.db.query("clips").filter((item) => item.eq(item.field("isApproved"), true) && item.neq(item.field("rejected"), true) && item.neq(item.field("userId"), user?._id)).collect()
+        const possibleClips = await ctx.db.query("clips").filter((item) => item.eq(item.field("isApproved"), true) && item.neq(item.field("rejected"), true) && item.neq(item.field("userId"), user?._id) && item.eq(item.field("game"), args.game)).collect()
         const guessedClips = await ctx.db.query("guesses").filter((item) => item.eq(item.field("userId"), user?._id) && item.eq(item.field("game"), args.game)).collect()
         const guessedClipIds = guessedClips.map((item) => item.clipId)
         const filteredClips = possibleClips.filter((item) => !guessedClipIds.includes(item._id))
