@@ -54,7 +54,6 @@ export const changeUsername = mutation({
     },
     handler: async (ctx, args) => {
         const user = await ctx.db.query("users").filter((item) => item.eq(item.field("email"), args.email)).first()
-        console.log(user)
         if(user === null) return
         const userId = await ctx.db.replace(user._id, { username: args.newUsername, email: args.email })
         return userId

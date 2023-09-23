@@ -112,7 +112,6 @@ const Play = () => {
     const currentClip = userClips ? userClips[currentIndex] : guestUserClips && guestUserClips[currentIndex]
     const guessingStats = userGuessingStats ? userGuessingStats : getLocalGuessStats(game)
 
-
     return (
         <>
             {showPostGuessPopup && <PostGuessPopup 

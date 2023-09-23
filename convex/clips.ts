@@ -70,7 +70,10 @@ export const seedData = internalMutation({
             } else {
                 userId = await ctx.db.insert("users", { username: clip.name, email: `${clip.name}@gmail.com` })
             }
-            await ctx.db.insert("clips", { game: clip.game, rank: clip.rank, link: clip.link, userId: userId, isApproved: true, rejected: false })
+            const existingClip = await ctx.db.query("clips").filter((item) => item.eq(item.field("link"), clip.link)).first()
+            if (!existingClip) {
+                await ctx.db.insert("clips", { game: clip.game, rank: clip.rank, link: clip.link, userId: userId, isApproved: true, rejected: false })
+            }
         }
 
     }
@@ -87,6 +90,13 @@ export const getLateststNotGuessedClip = query({
         const guessedClips = await ctx.db.query("guesses").filter((item) => item.eq(item.field("userId"), user?._id) && item.eq(item.field("game"), args.game)).collect()
         const guessedClipIds = guessedClips.map((item) => item.clipId)
         const filteredClips = possibleClips.filter((item) => !guessedClipIds.includes(item._id))
+        //randomize the order of the clips
+        for (let i = filteredClips.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * i)
+            const temp = filteredClips[i]
+            filteredClips[i] = filteredClips[j]
+            filteredClips[j] = temp
+        }
         return filteredClips
     }
 })
@@ -99,6 +109,13 @@ export const getLastestNotGuessedClipGuest = query({
     handler: async (ctx, args) => {
         const possibleClips = await ctx.db.query("clips").filter((item) => item.eq(item.field("isApproved"), true) && item.neq(item.field("rejected"), true) && item.eq(item.field("game"), args.game)).collect()
         const filteredClips = possibleClips.filter((item) => !args.alreadyGuessedClips.includes(item._id))
+        //randomize the order of the clips
+        for (let i = filteredClips.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * i)
+            const temp = filteredClips[i]
+            filteredClips[i] = filteredClips[j]
+            filteredClips[j] = temp
+        }
         return filteredClips
     }
 })

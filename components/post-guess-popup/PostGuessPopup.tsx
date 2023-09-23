@@ -44,7 +44,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
                         {correctRank === guessedRank ? (
                             <div className={styles.answer} style={{ width: '100%' }}>
                                 <h2 className={styles["correct-title"]}>Correct Answer</h2>
-                                <div className={styles["rank-container"]}>
+                                <div className={styles["rank-container"]} style={{ width: `calc(7rem * ${gameRanks[game].imageSizeMultiplierWidth})`, height: `calc(7rem * ${gameRanks[game].imageSizeMultiplierHeight})` }}>
                                     <Image
                                         src={gameRanks[game].ranks.find(rank => rank.name === correctRank)?.image!}
                                         fill
@@ -56,7 +56,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
                             <>
                                 <div className={styles.answer}>
                                     <h2 className={styles["wrong-title"]}>Wrong Answer</h2>
-                                    <div className={styles["rank-container"]}>
+                                    <div className={styles["rank-container"]} style={{ width: `calc(7rem * ${gameRanks[game].imageSizeMultiplierWidth})`, height: `calc(7rem * ${gameRanks[game].imageSizeMultiplierHeight})` }}>
                                         <Image
                                             src={gameRanks[game].ranks.find(rank => rank.name === guessedRank)?.image!}
                                             fill
@@ -66,7 +66,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
                                 </div>
                                 <div className={styles.answer}>
                                     <h2 className={styles["correct-title"]}>Correct Answer</h2>
-                                    <div className={styles["rank-container"]}>
+                                    <div className={styles["rank-container"]} style={{ width: `calc(7rem * ${gameRanks[game].imageSizeMultiplierWidth})`, height: `calc(7rem * ${gameRanks[game].imageSizeMultiplierHeight})` }}>
                                         <Image
                                             src={gameRanks[game].ranks.find(rank => rank.name === correctRank)?.image!}
                                             fill
