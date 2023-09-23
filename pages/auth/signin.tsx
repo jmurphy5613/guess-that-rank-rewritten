@@ -2,7 +2,7 @@ import { GetServerSidePropsContext, InferGetStaticPropsType } from "next"
 import { getServerSession } from "next-auth"
 import { getProviders, signIn } from "next-auth/react"
 import { authOptions } from "../api/auth/[...nextauth]"
-import styles from '../../styles/Signin.module.css'
+import styles from '../../styles/auth/Signin.module.css'
 import { getCompanyIconFromId } from "@/utils/conversions"
 import Logo from "@/components/icons/Logo"
 
