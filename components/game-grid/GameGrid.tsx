@@ -49,7 +49,7 @@ const GameGrid = () => {
     return (
         <div className={styles.grid}>
             {games.map((game, index) => (
-                <a href={`games/${game.name}`}>
+                <a href={`games/${game.name}`} key={index}>
                     <motion.div
                         className={styles.game}
                         style={{ backgroundImage: `url(${game.backgroundImage})`, backgroundPosition: 'center' }}

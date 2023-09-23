@@ -12,10 +12,6 @@ const links = [
         href: '/games'
     },
     {
-        name: 'Leaderboard',
-        href: '/leaderboard'
-    },
-    {
         name: 'Submit Clip',
         href: '/submit-clip'
     },
@@ -58,7 +54,7 @@ const Navbar = () => {
                 <h1 className={styles.title}>GuessThatRank</h1>
                 <div className={styles.links}>
                     {links.map((link, index) => (
-                        <a className={styles.link} href={link.href}>{link.name}</a>
+                        <a key={index} className={styles.link} href={link.href}>{link.name}</a>
                     ))}
                 </div>
             </div>

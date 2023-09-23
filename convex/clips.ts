@@ -29,7 +29,8 @@ export const createClip = mutation({
 export const getLatestNotApprovedClip = query({
     args: {},
     handler: async (ctx) => {
-        return await ctx.db.query("clips").filter((item) => item.eq(item.field("isApproved"), false) && item.neq(item.field("rejected"), true)).first()
+        const clips = await ctx.db.query("clips").filter((item) => item.and( item.not(item.field("isApproved")), item.not(item.field("rejected")))).collect()
+        return clips[0]
     }
 })
 

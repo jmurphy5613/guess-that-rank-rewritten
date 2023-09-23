@@ -30,6 +30,8 @@ const Approval = () => {
 
     if(!latestNotApprovedClip) return <></>
 
+    console.log(latestNotApprovedClip)
+
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Clip Approval</h1>
