@@ -47,8 +47,8 @@ const Approval = () => {
                 </div>
                 <p className={styles["suggested-link"]}>{showSuggestedLink && getMP4FromLink(latestNotApprovedClip.link)}</p>
                 <div className={styles["button-group"]}>
-                    <button className={styles.approve}>Approve</button>
-                    <button className={styles.next}>Next</button>
+                    <button className={styles.approve} onClick={handleApprove}>Approve</button>
+                    <button className={styles.next} onClick={handleNext}>Next</button>
                 </div>
             </div>
         </div>
