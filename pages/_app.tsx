@@ -19,7 +19,6 @@ export default function App({
 
   const router = useRouter()
   useEffect(() => {
-    console.log("things happening")
     ReactGA.initialize("G-PGFVE659LJ");
     const handleRouteChange = (url: string) => {
       ReactGA.send({ hitType: "pageview", page: url, title: `hit ${url}` });

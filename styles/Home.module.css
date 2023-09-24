@@ -75,3 +75,9 @@
 	height: 35px;
 	width: 35px;
 }
+
+@media screen and (max-width: 600px) {
+	.description {
+		width: 80%;
+	}
+}

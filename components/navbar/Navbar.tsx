@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import UserPopup from '../user-popup/UserPopup'
 import DownArrow from '../icons/DownArrow'
+import { useMediaQuery } from 'react-responsive'
 
 const links = [
     {
@@ -18,6 +19,8 @@ const links = [
 ]
 
 const Navbar = () => {
+
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 600px)' })
 
     function useOutsideAlerter(ref: React.RefObject<HTMLUnknownElement>) {
         useEffect(() => {
@@ -48,10 +51,14 @@ const Navbar = () => {
     return (
         <div className={styles.container}>
             <div className={styles["left"]}>
-                <div className={styles["logo-image-container"]}>
-                    <Logo stroke="#354DA1" />
-                </div>
-                <h1 className={styles.title}>GuessThatRank</h1>
+                {!isTabletOrMobile && (
+                    <>
+                        <div className={styles["logo-image-container"]}>
+                            <Logo stroke="#354DA1" />
+                        </div>
+                        <h1 className={styles.title}>GuessThatRank</h1>
+                    </>
+                )}
                 <div className={styles.links}>
                     {links.map((link, index) => (
                         <a key={index} className={styles.link} href={link.href}>{link.name}</a>
@@ -59,7 +66,7 @@ const Navbar = () => {
                 </div>
             </div>
             {session && session.user?.image ? (
-                <div style={{ display: 'flex', alignItems: 'center', position: 'relative', cursor: 'pointer' }} ref={wrapperRef}  onClick={() => setShowPopup(true)}>
+                <div style={{ display: 'flex', alignItems: 'center', position: 'relative', cursor: 'pointer' }} ref={wrapperRef} onClick={() => setShowPopup(true)}>
                     <div className={styles["user-icon-container"]}>
                         <Image
                             src={session.user.image}

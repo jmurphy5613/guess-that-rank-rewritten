@@ -90,8 +90,13 @@ const Play = () => {
         }
     }, [router.isReady])
 
+    const getEmbedWidth = () => {
+        return window.innerWidth <= 600 ? '90vw' : '60vw'
+    }
+
     const getRankItemDimensions = (length: number) => {
-        return `calc((60vw - ${length - 1}rem) / ${length})`
+        if(window.innerWidth <= 600) return `calc((${getEmbedWidth()} - ${length - 1}rem) / 5)`
+        return `calc((${getEmbedWidth()} - ${length - 1}rem) / ${length})`
     }
 
     if (!game || !(userClips || guestUserClips)) return <></>
