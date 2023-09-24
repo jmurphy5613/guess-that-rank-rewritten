@@ -152,3 +152,40 @@
 .blue {
     color: #354AA1;
 }
+
+@media screen and (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 1rem;
+    }
+    .count-up {
+        font-size: 4rem;
+    }
+    .correct-title {
+        font-size: 0.75rem;
+    }
+    .wrong-title {
+        font-size: 0.75rem;
+    }
+    .credit {
+        font-size: 1rem;
+    }
+    .submit-button {
+        width: 7rem;
+        height: 3rem;
+    }
+    .button-text {
+        font-size: 1rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+    .stat {
+        height: 20vh;
+    }
+    .count-up-wrapper {
+        width: 100%;
+    }
+}
+

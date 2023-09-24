@@ -24,6 +24,12 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
         const [showArrow, setShowArrow] = useState<boolean>(false)
         const [hoveringNext, setHoveringNext] = useState<boolean>(false)
 
+        const getRankHeight = () => {
+            if(!window) return 
+            if(window.innerWidth < 600) return 5
+            else return 7
+        }
+
         return (
             <motion.div
                 className={styles.backdrop}
@@ -44,7 +50,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
                         {correctRank === guessedRank ? (
                             <div className={styles.answer} style={{ width: '100%' }}>
                                 <h2 className={styles["correct-title"]}>Correct Answer</h2>
-                                <div className={styles["rank-container"]} style={{ width: `calc(7rem * ${gameRanks[game].imageSizeMultiplierWidth})`, height: `calc(7rem * ${gameRanks[game].imageSizeMultiplierHeight})` }}>
+                                <div className={styles["rank-container"]} style={{ width: `calc(${getRankHeight()}rem * ${gameRanks[game].imageSizeMultiplierWidth})`, height: `calc(${getRankHeight()}rem * ${gameRanks[game].imageSizeMultiplierHeight})` }}>
                                     <Image
                                         src={gameRanks[game].ranks.find(rank => rank.name === correctRank)?.image!}
                                         fill
@@ -56,7 +62,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
                             <>
                                 <div className={styles.answer}>
                                     <h2 className={styles["wrong-title"]}>Wrong Answer</h2>
-                                    <div className={styles["rank-container"]} style={{ width: `calc(7rem * ${gameRanks[game].imageSizeMultiplierWidth})`, height: `calc(7rem * ${gameRanks[game].imageSizeMultiplierHeight})` }}>
+                                    <div className={styles["rank-container"]} style={{ width: `calc(${getRankHeight()}rem * ${gameRanks[game].imageSizeMultiplierWidth})`, height: `calc(${getRankHeight()}rem * ${gameRanks[game].imageSizeMultiplierHeight})` }}>
                                         <Image
                                             src={gameRanks[game].ranks.find(rank => rank.name === guessedRank)?.image!}
                                             fill
@@ -66,7 +72,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
                                 </div>
                                 <div className={styles.answer}>
                                     <h2 className={styles["correct-title"]}>Correct Answer</h2>
-                                    <div className={styles["rank-container"]} style={{ width: `calc(7rem * ${gameRanks[game].imageSizeMultiplierWidth})`, height: `calc(7rem * ${gameRanks[game].imageSizeMultiplierHeight})` }}>
+                                    <div className={styles["rank-container"]} style={{ width: `calc(${getRankHeight()}rem * ${gameRanks[game].imageSizeMultiplierWidth})`, height: `calc(${getRankHeight()}rem * ${gameRanks[game].imageSizeMultiplierHeight})` }}>
                                         <Image
                                             src={gameRanks[game].ranks.find(rank => rank.name === correctRank)?.image!}
                                             fill
