@@ -91,10 +91,12 @@ const Play = () => {
     }, [router.isReady])
 
     const getEmbedWidth = () => {
+        if(!window) return
         return window.innerWidth <= 600 ? '90vw' : '60vw'
     }
 
     const getRankItemDimensions = (length: number) => {
+        if(!window) return
         if(window.innerWidth <= 600) return `calc((${getEmbedWidth()} - ${length - 0}rem) / 4)`
         return `calc((${getEmbedWidth()} - ${length - 1}rem) / ${length})`
     }
