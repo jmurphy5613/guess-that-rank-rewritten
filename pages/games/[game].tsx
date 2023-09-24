@@ -95,7 +95,7 @@ const Play = () => {
     }
 
     const getRankItemDimensions = (length: number) => {
-        if(window.innerWidth <= 600) return `calc((${getEmbedWidth()} - ${length - 1}rem) / 5)`
+        if(window.innerWidth <= 600) return `calc((${getEmbedWidth()} - ${length - 0}rem) / 4)`
         return `calc((${getEmbedWidth()} - ${length - 1}rem) / ${length})`
     }
 
