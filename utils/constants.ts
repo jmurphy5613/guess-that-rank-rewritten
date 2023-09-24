@@ -109,6 +109,10 @@ export const gameRanks: GameData = {
                 image: '/ranks/league/league-emerald.png'
             },
             {
+                name: 'diamond',
+                image: '/ranks/league/league-diamond.png'
+            },
+            {
                 name: 'master',
                 image: '/ranks/league/league-master.png'
             },
