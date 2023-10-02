@@ -25,7 +25,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
         const [hoveringNext, setHoveringNext] = useState<boolean>(false)
 
         const getRankHeight = () => {
-            if(!window) return 
+            if(!window) return
             if(window.innerWidth < 600) return 5
             else return 7
         }
@@ -52,7 +52,12 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
                                 <h2 className={styles["correct-title"]}>Correct Answer</h2>
                                 <div className={styles["rank-container"]} style={{ width: `calc(${getRankHeight()}rem * ${gameRanks[game].imageSizeMultiplierWidth})`, height: `calc(${getRankHeight()}rem * ${gameRanks[game].imageSizeMultiplierHeight})` }}>
                                     <Image
-                                        src={gameRanks[game].ranks.find(rank => rank.name === correctRank)?.image!}
+                                        src={(function(){
+                                            console.log("cr: ", correctRank);
+                                            console.log("gr: ", guessedRank);
+                                            console.log("img: ",  gameRanks[game].ranks.find(rank => rank.name === correctRank)?.image!)
+                                            return gameRanks[game].ranks.find(rank => rank.name === correctRank)?.image!
+                                        })()}
                                         fill
                                         alt="Valorant Iron Rank"
                                     />
