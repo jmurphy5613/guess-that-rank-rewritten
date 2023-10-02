@@ -178,11 +178,8 @@ const Play = () => {
                     onMouseEnter={() => setHoveringLockInt(true)}
                     onMouseLeave={() => setHoveringLockInt(false)}
                     whileHover={{ scale: 1.1 }}
-                    disabled={(function () {
-                        console.log(currentSelectedRank)
-                        return currentSelectedRank === undefined
-                    })()}
-                    data-grayout={(currentSelectedRank === undefined)}
+                    disabled={currentSelectedRank === undefined}
+                    data-grayout={currentSelectedRank === undefined}
                     onClick={() => {
                         setShowPostGuessPopup(true)
                         stashData()

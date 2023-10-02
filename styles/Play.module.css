@@ -69,9 +69,6 @@
     opacity: 1;
 }
 
-/*
-i LOVE data attributes!!!!!!!!!!1
-*/
 .submit-button[data-grayout="true"] {
     cursor: not-allowed;
     opacity: 0.5;
