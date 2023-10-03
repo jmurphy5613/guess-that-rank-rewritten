@@ -179,7 +179,6 @@ const Play = () => {
                     onMouseLeave={() => setHoveringLockInt(false)}
                     whileHover={{ scale: 1.1 }}
                     disabled={currentSelectedRank === undefined}
-                    data-grayout={currentSelectedRank === undefined}
                     onClick={() => {
                         setShowPostGuessPopup(true)
                         stashData()

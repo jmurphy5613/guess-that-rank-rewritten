@@ -69,7 +69,8 @@
     opacity: 1;
 }
 
-.submit-button[data-grayout="true"] {
+.submit-button:disabled,
+.submit-button[disabled] {
     cursor: not-allowed;
     opacity: 0.5;
 }
