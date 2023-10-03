@@ -57,19 +57,20 @@ const Play = () => {
     const [latestGuessedRank, setLatestGuessedRank] = useState<string>("")
 
     const stashData = () => {
-        if(!game || !currentSelectedRank) return
+        if(!game || currentSelectedRank === undefined) return
+
         if(userClips) {
             setLatestCorrectRank(userClips[currentIndex].rank)
         } else if(guestUserClips) {
             setLatestCorrectRank(guestUserClips[currentIndex].rank)
         }
+
         setLatestGuessedRank(gameRanks[game].ranks[currentSelectedRank].name)
         setLatestClipAuthor(clipCreatorUser?.username || '')
     }
 
     const onGuessSubmit = async () => {
-        if(!currentSelectedRank || !game) return
-
+        if(currentSelectedRank === undefined || !game) return
 
         if(userClips && user) {
             await createGuess({
@@ -82,6 +83,7 @@ const Play = () => {
         } else if (guestUserClips) {
             createLocalGuess(guestUserClips[currentIndex]._id, gameRanks[game].ranks[currentSelectedRank].name, guestUserClips[currentIndex].rank, game)
         }
+
     }
 
     useEffect(() => {
@@ -119,16 +121,22 @@ const Play = () => {
     const currentClip = userClips ? userClips[currentIndex] : guestUserClips && guestUserClips[currentIndex]
     const guessingStats = userGuessingStats ? userGuessingStats : getLocalGuessStats(game)
 
+    // reset the selected rank
+    const reset = (showPopup: boolean) => {
+        setCurrentSelectedRank(undefined);
+        setShowPostGuessPopup(showPopup);
+    }
+
     return (
         <>
-            {showPostGuessPopup && <PostGuessPopup 
-                isGuest={session === null} 
-                clipAuthor={latestClipAuthor} 
-                currentGamePoints={guessingStats.gamePoints} 
-                overallPoints={guessingStats.overallPoints} 
-                game={game} correctRank={latestCorrectRank} 
+            {showPostGuessPopup && <PostGuessPopup
+                isGuest={session === null}
+                clipAuthor={latestClipAuthor}
+                currentGamePoints={guessingStats.gamePoints}
+                overallPoints={guessingStats.overallPoints}
+                game={game} correctRank={latestCorrectRank}
                 guessedRank={latestGuessedRank}
-                setShowPostGuessPopup={setShowPostGuessPopup} 
+                setShowPostGuessPopup={reset}
             />}
             <Navbar />
             <div className={styles.container}>
@@ -170,6 +178,7 @@ const Play = () => {
                     onMouseEnter={() => setHoveringLockInt(true)}
                     onMouseLeave={() => setHoveringLockInt(false)}
                     whileHover={{ scale: 1.1 }}
+                    disabled={currentSelectedRank === undefined}
                     onClick={() => {
                         setShowPostGuessPopup(true)
                         stashData()

@@ -64,8 +64,16 @@
 	cursor: pointer;
 	margin-top: 2rem;
     width: 60vw;
+
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
 }
 
+.submit-button:disabled,
+.submit-button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
 
 .button-text {
 	font-size: 1.25rem;

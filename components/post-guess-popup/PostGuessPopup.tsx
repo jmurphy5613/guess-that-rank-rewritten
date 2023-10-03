@@ -25,7 +25,7 @@ const PostGuessPopup: React.FC<PostGuessPopupProps> =
         const [hoveringNext, setHoveringNext] = useState<boolean>(false)
 
         const getRankHeight = () => {
-            if(!window) return 
+            if(!window) return
             if(window.innerWidth < 600) return 5
             else return 7
         }
